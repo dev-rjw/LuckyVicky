@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="content-language" content="ko" />
+        <meta name="viewport" content="initial-scale=1.0,user-scalable=yes,maximum-scale=3,width=device-width" />
+
+        <title>럭7ㅣ비7ㅣ</title>
+        <meta name="title" content="럭7ㅣ비7ㅣ" />
+        <meta name="subject" content="럭7ㅣ비7ㅣ" />
+        <meta name="author" content="럭7ㅣ비7ㅣ" />
+        <meta name="copyright" content="럭7ㅣ비7ㅣ" />
+        <meta name="description" content="럭7ㅣ비7ㅣ" />
+        <meta name="keywords" content="럭7ㅣ비7ㅣ" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="럭7ㅣ비7ㅣ" />
+        <meta property="og:description" content="럭7ㅣ비7ㅣ" />
+        <meta property="og:image" content="/resources/images/og.jpg" />
+    </head>
+    <body>
+        <button type="button" class="btn btn-primary">럭7ㅣ비7ㅣ 버튼</button>
+
+        <!-- carousel css 시작 -->
+        <style>
+            body {
+                background: #515151; /* 흰색배경 눈아파서 잠시 어둡게.. 삭제예정!*/
+            }
+            #carousel-wrap {
+                position: relative;
+                overflow: hidden;
+                width: 100%;
+                max-width: 600px; /* 서브페이지 영역에 따라 변경되거나 삭제될 값*/
+                box-sizing: border-box;
+            }
+            #carousel-wrap .inner {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+            }
+            #carousel-wrap img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            #carousel-slide {
+                position: relative;
+                display: flex;
+                width: 100%;
+                transform: translate3d(0px, 0px, 0px);
+                transition-duration: 300ms;
+            }
+            .carousel-slide-item {
+                max-height: 400px;
+                flex: 1 0 auto;
+            }
+            #carousel-thumb {
+                display: flex;
+                gap: 10px;
+            }
+            .carousel-thumb-item {
+                flex: 1;
+                cursor: pointer;
+            }
+            .carousel-thumb-item.curr {
+                /* 인터렉션은 추후 디자인 확인 후 적용 */
+                border: 2px solid red;
+            }
+        </style>
+        <!--// carousel css 종료 -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const carouselWrap = document.getElementById("carousel-wrap");
+                const carouselSlide = document.getElementById("carousel-slide");
+                const carouselSlideItems = document.querySelectorAll(".carousel-slide-item");
+                const carouselSlideLength = carouselSlideItems.length;
+                const carouselThumb = document.getElementById("carousel-thumb");
+                const carouselThumbItems = document.querySelectorAll(".carousel-thumb-item");
+                const carouselBtnArea = document.getElementById("carousel-btn-area");
+
+                let slideWid; // 슬라이드 넓이 값
+                let slideAllWid; // 슬라이드 요소 전체 넓이 값
+                let slideCurrentIdx = 0; // 슬라이드 현재 인덱스 값
+                let slideMoveDelay = 3000; // 슬라이드 돌아가는 속도
+                let slideMoveTimer; // interval 초기화
+
+                // 로딩 시 리스트 데이터 받기
+                /*let docs = await getDocs(collection(db, "유저 이미지")); 
+                docs.forEach((doc) => {
+                  let row = doc.data();
+                  console.log(row); // 데이터 확인
+
+                  let carouselImg = row["image"];
+                  const carouselItemHtml = `
+                    <div class="carousel-slide-item">
+                        <img src="${carouselImg}" alt="">
+                      </div>
+                  `;
+                  const carouselThumbHtml = `
+                    <div class="carousel-thumb-item">
+                      <img src="${carouselImg}" alt="">
+                    </div>
+                  `;
+
+                  carouselSlide.innerHTML += carouselItemHtml; 
+                });
+                */
+
+                // 슬라이드 리스트 넓이 값 적용
+                slideWid = carouselSlide.offsetWidth;
+                carouselSlideItems.forEach((item, idx) => {
+                    // console.log(item);
+                    item.style.width = slideWid + "px";
+                });
+
+                // 슬라이드 자동 롤링
+                const carouselSlideMove = () => {
+                    slideMoveTimer = setInterval(() => {
+                        slideCurrentIdx = (slideCurrentIdx + 1) % carouselSlideItems.length; // 현재 인덱스값 구하기
+                        carouselSlide.style.transform = `translate3d(-${slideCurrentIdx * slideWid}px, 0px, 0px)`;
+                        // 활성화된 썸네일 업데이트
+                        carouselThumbItems.forEach((thumb, idx) => {
+                            thumb.classList.toggle("curr", idx === slideCurrentIdx);
+                        });
+                    }, slideMoveDelay);
+                };
+                carouselSlideMove();
+
+                // 슬라이드 썸네일 기능 적용
+                carouselThumbItems.forEach((item, idx) => {
+                    // 썸네일 클릭 이벤트
+                    item.addEventListener("click", () => {
+                        console.log(idx);
+                        // 클릭한 요소가 엑티브가 되어야 해서 초기화해줬습니다.
+                        carouselThumbItems.forEach((thumb) => {
+                            thumb.classList.remove("curr");
+                        });
+                        // 클릭한 요소 엑티브
+                        item.classList.add("curr");
+
+                        //클릭한 요소에 맞춰 슬라이드 이동 : carouselSlide의 transform3d의 값을 클릭한 요소의 -(인덱스x슬라이드) 넓이로 적용
+                        carouselSlide.style.transform = `translate3d(-${idx * slideWid}px, 0px, 0px)`;
+                    });
+                });
+            });
+        </script>
+
+        <!-- carousel-wrap -->
+        <div id="carousel-wrap">
+            <div class="inner">
+                <!-- carousel-slide -->
+                <div id="carousel-slide">
+                    <div class="carousel-slide-item">
+                        <img src="https://blog.kakaocdn.net/dn/dsXrza/btroasUAubU/a4ag2QKFY0dBrncWpwLOR1/img.png" alt="" />
+                    </div>
+                    <div class="carousel-slide-item">
+                        <img src="https://blog.kakaocdn.net/dn/bftsOR/btrLjksba4V/AP5BZsKkOk8u1V70UiNP6k/img.png" alt="" />
+                    </div>
+                    <div class="carousel-slide-item">
+                        <img src="https://community-media.linkareer.com/41646?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jb21tdW5pdHktbWVkaWEubGlua2FyZWVyLmNvbS8qIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzIzNzcxNTA2fX19XX0_&Key-Pair-Id=K355AZ2AKPMK1Z&Signature=YoQJTWMxVxCmXaABYutsnjwdTVmbWDPLrdDYl9Vz~9Nj1G4PrLI6Xwz3Fef5ZVkN3lWspxnzEbdPBkbd-y-eRF5nMtSeGvH9o7SEoF1fl9R44zDXUHBgt~cib8iwd9Q6x9IkVMOX8pLCrC6B9HiZcuKg6DKoJr60Dv52lQ~dC1NEHSDKY3E3wfUUzm3k7KNZzSGF7A0ch0e1Z1e6lqdzrsznNb4DVXUSSxoYog~57-XQHjBEpKRtTvtItJOwytEolTG3nIIurPYZ3XxEw3OHRdJuz5RvpDhJNWfuR7vCdi2Rm-igOiSGSGs83oeJzZz32DN6VWFO31~YOdwl7xo-OQ__" alt="" />
+                    </div>
+                    <div class="carousel-slide-item">
+                        <img src="https://velog.velcdn.com/images/zeze95/post/0182c380-4eef-40b0-b6dd-ca8c41443e6b/image.jpeg" alt="" />
+                    </div>
+                    <div class="carousel-slide-item">
+                        <img src="https://cdn.inflearn.com/public/files/pages/4aecde0f-46f9-482a-b8a4-d6aee67c6cc3/%ED%9E%88%EC%96%B4%EB%A1%9C%EB%A7%9B%20%EC%BF%A0%ED%82%A4.jpg" alt="" />
+                    </div>
+                </div>
+                <!--// carousel-slide -->
+
+                <!-- carousel-thumb -->
+                <div id="carousel-thumb">
+                    <div class="carousel-thumb-item curr">
+                        <img src="https://blog.kakaocdn.net/dn/dsXrza/btroasUAubU/a4ag2QKFY0dBrncWpwLOR1/img.png" alt="" />
+                    </div>
+                    <div class="carousel-thumb-item">
+                        <img src="https://blog.kakaocdn.net/dn/bftsOR/btrLjksba4V/AP5BZsKkOk8u1V70UiNP6k/img.png" alt="" />
+                    </div>
+                    <div class="carousel-thumb-item">
+                        <img src="https://community-media.linkareer.com/41646?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jb21tdW5pdHktbWVkaWEubGlua2FyZWVyLmNvbS8qIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzIzNzcxNTA2fX19XX0_&Key-Pair-Id=K355AZ2AKPMK1Z&Signature=YoQJTWMxVxCmXaABYutsnjwdTVmbWDPLrdDYl9Vz~9Nj1G4PrLI6Xwz3Fef5ZVkN3lWspxnzEbdPBkbd-y-eRF5nMtSeGvH9o7SEoF1fl9R44zDXUHBgt~cib8iwd9Q6x9IkVMOX8pLCrC6B9HiZcuKg6DKoJr60Dv52lQ~dC1NEHSDKY3E3wfUUzm3k7KNZzSGF7A0ch0e1Z1e6lqdzrsznNb4DVXUSSxoYog~57-XQHjBEpKRtTvtItJOwytEolTG3nIIurPYZ3XxEw3OHRdJuz5RvpDhJNWfuR7vCdi2Rm-igOiSGSGs83oeJzZz32DN6VWFO31~YOdwl7xo-OQ__" alt="" />
+                    </div>
+                    <div class="carousel-thumb-item">
+                        <img src="https://velog.velcdn.com/images/zeze95/post/0182c380-4eef-40b0-b6dd-ca8c41443e6b/image.jpeg" alt="" />
+                    </div>
+                    <div class="carousel-thumb-item">
+                        <img src="https://cdn.inflearn.com/public/files/pages/4aecde0f-46f9-482a-b8a4-d6aee67c6cc3/%ED%9E%88%EC%96%B4%EB%A1%9C%EB%A7%9B%20%EC%BF%A0%ED%82%A4.jpg" alt="" />
+                    </div>
+                </div>
+                <!-- carousel-thumb -->
+
+                <!-- btn-area -->
+                <div id="carousel-btn-area"></div>
+                <!--// btn-area -->
+            </div>
+        </div>
+        <!--// carousel-wrap -->
+    </body>
+</html>

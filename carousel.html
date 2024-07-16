@@ -175,12 +175,12 @@
                     // 이미지 들어가면 실행이 안되가지고 css 에서 img에 user-drag: none; 넣어줘야함
                     // console.log("[2] mouseup : 마우스 땟을 때");
                     isDragChk = false;
-
+                    console.log(slideCurrentIdx, carouselSlideLength, pos);
                     clientX = e.clientX;
                     pos == 1 ? (slideCurrentIdx = slideCurrentIdx + 1) : (slideCurrentIdx = slideCurrentIdx - 1);
-                    if (slideCurrentIdx >= carouselSlideLength) {
+                    if (slideCurrentIdx + 1 >= carouselSlideLength) {
                         console.log("슬라이드 끝");
-                    } else if (slideCurrentIdx <= 0) {
+                    } else if (slideCurrentIdx + 1 <= 0) {
                         console.log("슬라이드 시작");
                     } else {
                         carouselSlide.style.transform = `translate3d(-${slideCurrentIdx * slideWid}px, 0px, 0px)`;
@@ -195,7 +195,7 @@
                 });
                 carouselWrap.addEventListener("mousemove", (e) => {
                     if (isDragChk) {
-                        console.log("[3] mousemove : 마우스 이동할 때");
+                        //console.log("[3] mousemove : 마우스 이동할 때");
                         console.log(e);
                     }
                 });

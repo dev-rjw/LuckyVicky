@@ -54,6 +54,10 @@
             .carousel-slide-item {
                 max-height: 400px;
                 flex: 1 0 auto;
+                overflow-clip-margin: content-box;
+                overflow: clip;
+                pointer-events: auto;
+                transition: transform 0.3s ease;
             }
             #carousel-thumb {
                 display: flex;
@@ -104,7 +108,7 @@
                 let slideWid; // 슬라이드 넓이 값
                 let slideAllWid; // 슬라이드 요소 전체 넓이 값
                 let slideCurrentIdx = 0; // 슬라이드 현재 인덱스 값
-                let slideMoveDelay = 3000; // 슬라이드 돌아가는 속도
+                let slideMoveDelay = 0; // 슬라이드 돌아가는 속도
                 let slideMoveTimer; // interval 초기화
 
                 // 슬라이드 리스트 초기 넓이 세팅
@@ -116,6 +120,8 @@
 
                 // 슬라이드 자동 롤링
                 const carouselSlideMove = () => {
+                    console.log(slideMoveDelay);
+                    slideMoveDelay = 3000;
                     slideMoveTimer = setInterval(() => {
                         slideCurrentIdx = (slideCurrentIdx + 1) % carouselSlideItems.length; // 현재 인덱스값 구하기
                         carouselSlide.style.transform = `translate3d(-${slideCurrentIdx * slideWid}px, 0px, 0px)`;
@@ -131,6 +137,8 @@
                 carouselThumbItems.forEach((item, idx) => {
                     // 썸네일 클릭 이벤트
                     item.addEventListener("click", () => {
+                        clearInterval(slideMoveTimer); // 롤링 초기화 하기 위해 멈춰줌
+
                         // 클릭한 요소가 엑티브가 되어야 해서 초기화해줬습니다.
                         carouselThumbItems.forEach((thumb) => {
                             thumb.classList.remove("curr");
@@ -142,9 +150,64 @@
                         carouselSlide.style.transform = `translate3d(-${idx * slideWid}px, 0px, 0px)`;
 
                         slideCurrentIdx = idx; // 인덱스값을 클릭한 인덱스 값과 동일하게 변경해줌
-                        clearInterval(slideMoveTimer); // 롤링 초기화 하기 위해 멈춰줌
                         carouselSlideMove(); // 다시 롤링 시작
                     });
+                });
+
+                // 마우스 올렸을 시에 자동 슬라이드 종료
+                carouselWrap.addEventListener("mouseover", () => {
+                    // console.log("carouselWrap mouseover");
+                    // clearInterval(slideMoveTimer);
+                });
+
+                // 마우스 나왔을 시에 자동 슬라이드 종료
+                carouselWrap.addEventListener("mouseout", () => {
+                    // console.log("carouselWrap mouseout");
+                    // carouselSlideMove();
+                });
+
+                // 마우스 드래그 기능
+                carouselSlide.addEventListener("drag", (e) => {
+                    // console.log("carouselWrap drag", e);
+                    clearInterval(slideMoveTimer); // 드래그 시작시 자동 슬라이드 종료
+
+                    let x = e.clientX;
+                    let grabChk = 0;
+
+                    // 슬라이드 넓이 - 현재 클릭한 값 = 움직이는 값?
+                    // let marginVal = -(slideWid - e.clientX);
+                    // 근데 인덱스 마다 e.clientX 값은 고정되어서 * 인덱스를 해줘야함
+                    // let marignVal = -(slideWid - x);
+
+                    slideWid / 2 > x ? (grabChk = -1) : (grabChk = 0);
+                    if (!grabChk == 0) {
+                        console.log("마우스 그랩이 왼쪽부터 시작할 경우");
+                    } else {
+                        console.log("마우스 그랩이 오른부터 시작할 경우");
+                    }
+
+                    console.log(grabChk);
+                });
+
+                // 마우스 드래그 시작
+                carouselSlide.addEventListener("dragging", (e) => {
+                    // console.log("carouselWrap drag start");
+                });
+
+                // 마우스 드래그 종료
+                carouselSlide.addEventListener("dragend", (e) => {
+                    // console.log("carouselWrap drag end ", e);
+
+                    let x = e.clientX;
+                    let grabChk = 0;
+
+                    if (!grabChk == 0) {
+                        console.log("마우스 그랩이 왼쪽부터 종료할 경우");
+                    } else {
+                        console.log("마우스 그랩이 오른부터 종료할 경우");
+                    }
+
+                    carouselSlideMove(); // 드래그 종료되면 자동 슬라이드 다시 시작
                 });
             });
         </script>

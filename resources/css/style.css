@@ -3,5 +3,133 @@ body {
 }
 
 .main {
-    background: linear-gradient(to right bottom, #FAF9DB, #CEEBE0);
+    background-color: #fcf9ed;
+    min-height: 100vh;
+    padding: 40px 4%;
+}
+.main .wrap {
+    position: relative;
+    max-width: 1280px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 8%;
+}
+.main .team-area {
+    position: sticky;
+    top: 24px;
+    width: 35%;
+    min-width: 360px;
+    height: fit-content;
+}
+.main .title {
+    height: 80px;
+    text-align: center;
+}
+.main .title h2 {
+    margin: 0;
+    font-weight: 700;
+    color: #193722;
+}
+.main .team-info {
+    border: 2px solid #193722;
+    border-radius: 24px;
+    overflow: hidden;
+}
+.main .team-info > img {
+    width: 100%;
+
+}
+.main .team-info .box {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 24px 24px;
+    font-size: 14px;
+}
+.main .team-info .box .sub-title {
+    color: #193722;
+    font-size: 16px;
+    font-weight: 700;
+}
+.main .team-info .box div + .sub-title {
+    margin-top: 12px;
+}
+.main .team-info .sub-title + div {
+    background-color: #193722;
+    border-radius: 4px;
+    padding: 8px;
+    margin-top: 8px;
+    line-height: 1.5;
+    color: #fcf9ed;
+}
+
+.main .mem-area {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 80px;
+}
+
+.main .mem-box {
+    display: flex;
+    justify-content: space-between;
+    gap: 8%;
+}
+.main .mem-img {
+    width: 65%;
+    flex-shrink: 0;
+}
+.main .mem-img a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 0;
+    padding: 50% 0;
+    border-radius: 16px;
+    overflow: hidden;
+}
+.main .mem-img a .hover-txt {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 24px;
+    color: #fff;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    transition: 0.3s;
+}
+.main .mem-img a:hover .hover-txt {
+    opacity: 1;
+}
+.main .mem-img img {
+    width: 100%;
+}
+.main .mem-box .link {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    gap: 10%;
+    width: 100%;
+}
+.main .mem-box .link a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50%;
+    background-color: #fff;
+    border: 2px solid #193722;
+    border-radius: 16px;
+    text-decoration: none;
 }

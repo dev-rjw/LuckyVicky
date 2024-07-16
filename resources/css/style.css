@@ -134,7 +134,7 @@ div#intro.hide + #main {
 #main .team-area {
     position: sticky;
     top: 40px;
-    width: 35%;
+    width: 40%;
     min-width: 360px;
     height: fit-content;
 }

@@ -71,20 +71,6 @@
         <!--// carousel css 종료 -->
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                const carouselWrap = document.getElementById("carousel-wrap");
-                const carouselSlide = document.getElementById("carousel-slide");
-                const carouselSlideItems = document.querySelectorAll(".carousel-slide-item");
-                const carouselSlideLength = carouselSlideItems.length;
-                const carouselThumb = document.getElementById("carousel-thumb");
-                const carouselThumbItems = document.querySelectorAll(".carousel-thumb-item");
-                const carouselBtnArea = document.getElementById("carousel-btn-area");
-
-                let slideWid; // 슬라이드 넓이 값
-                let slideAllWid; // 슬라이드 요소 전체 넓이 값
-                let slideCurrentIdx = 0; // 슬라이드 현재 인덱스 값
-                let slideMoveDelay = 3000; // 슬라이드 돌아가는 속도
-                let slideMoveTimer; // interval 초기화
-
                 // 로딩 시 리스트 데이터 받기
                 /*let docs = await getDocs(collection(db, "유저 이미지")); 
                 docs.forEach((doc) => {
@@ -107,7 +93,21 @@
                 });
                 */
 
-                // 슬라이드 리스트 넓이 값 적용
+                const carouselWrap = document.getElementById("carousel-wrap");
+                const carouselSlide = document.getElementById("carousel-slide");
+                const carouselSlideItems = document.querySelectorAll(".carousel-slide-item");
+                const carouselSlideLength = carouselSlideItems.length;
+                const carouselThumb = document.getElementById("carousel-thumb");
+                const carouselThumbItems = document.querySelectorAll(".carousel-thumb-item");
+                const carouselBtnArea = document.getElementById("carousel-btn-area");
+
+                let slideWid; // 슬라이드 넓이 값
+                let slideAllWid; // 슬라이드 요소 전체 넓이 값
+                let slideCurrentIdx = 0; // 슬라이드 현재 인덱스 값
+                let slideMoveDelay = 3000; // 슬라이드 돌아가는 속도
+                let slideMoveTimer; // interval 초기화
+
+                // 슬라이드 리스트 초기 넓이 세팅
                 slideWid = carouselSlide.offsetWidth;
                 carouselSlideItems.forEach((item, idx) => {
                     // console.log(item);
@@ -131,7 +131,6 @@
                 carouselThumbItems.forEach((item, idx) => {
                     // 썸네일 클릭 이벤트
                     item.addEventListener("click", () => {
-                        console.log(idx);
                         // 클릭한 요소가 엑티브가 되어야 해서 초기화해줬습니다.
                         carouselThumbItems.forEach((thumb) => {
                             thumb.classList.remove("curr");
@@ -139,8 +138,12 @@
                         // 클릭한 요소 엑티브
                         item.classList.add("curr");
 
-                        //클릭한 요소에 맞춰 슬라이드 이동 : carouselSlide의 transform3d의 값을 클릭한 요소의 -(인덱스x슬라이드) 넓이로 적용
+                        //클릭한 요소에 맞춰 슬라이드 이동 : carouselSlide의 transform3d의 값을 클릭한 요소의 -(인덱스*슬라이드) 넓이로 적용
                         carouselSlide.style.transform = `translate3d(-${idx * slideWid}px, 0px, 0px)`;
+
+                        slideCurrentIdx = idx; // 인덱스값을 클릭한 인덱스 값과 동일하게 변경해줌
+                        clearInterval(slideMoveTimer); // 롤링 초기화 하기 위해 멈춰줌
+                        carouselSlideMove(); // 다시 롤링 시작
                     });
                 });
             });

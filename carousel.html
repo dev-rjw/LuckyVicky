@@ -102,9 +102,9 @@
                 });
                 */
 
-                const carouselWrap = document.getElementById("carousel-wrap");
-                const carouselSlide = document.getElementById("carousel-slide");
-                const carouselSlideItems = document.querySelectorAll(".carousel-slide-item");
+                const carouselWrap = document.getElementById("carousel-wrap"); // 전체 감싸고있는 슬라이드 영역
+                const carouselSlide = document.getElementById("carousel-slide"); // 큰 이미지 슬라이드 (자동)
+                const carouselSlideItems = document.querySelectorAll(".carousel-slide-item"); // 큰 이미지 슬라이드 아이템
                 const carouselSlideLength = carouselSlideItems.length;
                 const carouselThumb = document.getElementById("carousel-thumb");
                 const carouselThumbItems = document.querySelectorAll(".carousel-thumb-item");
@@ -160,53 +160,66 @@
                     });
                 });
 
-                // 드래그 기능
+                /*****************************************
+                 **************** 드래그 기능 ****************
+                 ******************************************
+                 **/
                 let isDragChk = false; // mousemove를 드래그 기능 체크
-                let clientX;
-                let pos; // 드래그 했을 때 좌,우 판별 체크
-                carouselWrap.addEventListener("mousedown", (e) => {
+                let downClientX;
+                let upClientX;
+                let posStart; // 드래그 시작 했을 때 좌,우 판별 체크
+                let posEnd; // 드래그 종료 했을 때 좌,우 판별 체크
+
+                carouselSlide.addEventListener("mousedown", (e) => {
                     //console.log("[1] mousedown : 마우스 클릭했을 때");
                     isDragChk = true;
-                    clientX = e.clientX;
-                    slideWid / 2 > clientX ? (pos = -1) : (pos = 1);
-                    carouselSlide.style.transform = `translate3d(-${slideCurrentIdx * slideWid}px, 0px, 0px)`;
+                    downClientX = e.clientX;
+
+                    // 마우스 클릭한 영역이 오른쪽인지 왼쪽인지 구분, mouseup이벤트에서 전달받아 마우스 땟을 때 위치를 추가로 확인 후 슬라이드 기능 적용
+                    slideWid / 2 > downClientX ? (posStart = -1) : (posStart = 1);
+
+                    // 큰이미지 영역에서 마우스 이벤트 발생할 때, 50% 기준으로 나눴는데 (오른쪽을 누르고도 오른쪽 액션할 경우 문제가 생겻음)
+                    // 마우스 오버이벤트 일 때, 첫 클릭한 기준 값 오버할 때 한번더 if 문으로 체크함, 그리고 마우스 땟을 때 아래의 코드가 실행 해야함
+                    // carouselSlide.style.transform = `translate3d(-${slideCurrentIdx * slideWid}px, 0px, 0px)`;
                 });
-                carouselWrap.addEventListener("mouseup", (e) => {
+                carouselSlide.addEventListener("mouseup", (e) => {
                     // 이미지 들어가면 실행이 안되가지고 css 에서 img에 user-drag: none; 넣어줘야함
                     // console.log("[2] mouseup : 마우스 땟을 때");
                     isDragChk = false;
-                    console.log(slideCurrentIdx, carouselSlideLength, pos);
-                    clientX = e.clientX;
-                    pos == 1 ? (slideCurrentIdx = slideCurrentIdx + 1) : (slideCurrentIdx = slideCurrentIdx - 1);
-                    if (slideCurrentIdx + 1 >= carouselSlideLength) {
-                        console.log("슬라이드 끝");
-                    } else if (slideCurrentIdx + 1 <= 0) {
-                        console.log("슬라이드 시작");
-                    } else {
-                        carouselSlide.style.transform = `translate3d(-${slideCurrentIdx * slideWid}px, 0px, 0px)`;
+                    upClientX = e.clientX;
 
-                        // 클릭한 요소가 엑티브가 되어야 해서 초기화해줬습니다.
-                        carouselThumbItems.forEach((thumb) => {
-                            thumb.classList.remove("curr");
-                        });
-                        // 클릭한 요소 엑티브
-                        carouselThumbItems[slideCurrentIdx].classList.add("curr");
+                    // 마우스 땟을 때 오른쪽
+                    slideWid / 2 > upClientX ? (posEnd = -1) : (posEnd = 1);
+
+                    if (downClientX > upClientX) {
+                        // 오른쪽으로 슬라이드
+                        slideCurrentIdx == 4 ? (slideCurrentIdx = 0) : slideCurrentIdx++;
+                    } else {
+                        // 왼쪽으로 슬라이드
+                        slideCurrentIdx == 0 ? (slideCurrentIdx = 4) : slideCurrentIdx--;
                     }
+
+                    carouselSlide.style.transform = `translate3d(-${slideCurrentIdx * slideWid}px, 0px, 0px)`;
+                    // 클릭한 요소가 엑티브가 되어야 해서 초기화해줬습니다.
+                    carouselThumbItems.forEach((thumb) => {
+                        thumb.classList.remove("curr");
+                    });
+                    // 클릭한 요소 엑티브
+                    carouselThumbItems[slideCurrentIdx].classList.add("curr");
                 });
                 carouselWrap.addEventListener("mousemove", (e) => {
                     if (isDragChk) {
                         //console.log("[3] mousemove : 마우스 이동할 때");
-                        console.log(e);
+                        //console.log(e);
                     }
                 });
-                carouselWrap.addEventListener("mouseover", (e) => {
+                carouselSlide.addEventListener("mouseover", (e) => {
                     // console.log("[4] mouseover : 마우스 들어올 때");
                     // 자동 슬라이드 종료
                     clearInterval(slideMoveTimer);
-
                     isDragChk = false;
                 });
-                carouselWrap.addEventListener("mouseleave", (e) => {
+                carouselSlide.addEventListener("mouseleave", (e) => {
                     // console.log("[5]mouseleave : 마우스 떠날 때");
                     isDragChk = false;
 

@@ -1,3 +1,7 @@
 body {
     font-family: "Pretendard", "Noto Sans KR", "Nanum Gothic", "Apple SD Gothic Neo", Helvetica, Arial, sans-serif;
 }
+
+.main {
+    background: linear-gradient(to right bottom, #FAF9DB, #CEEBE0);
+}

@@ -1,4 +1,5 @@
 body {
+    cursor: none;
     font-family: "Pretendard", "Noto Sans KR", "Nanum Gothic", "Apple SD Gothic Neo", Helvetica, Arial, sans-serif;
 }
 body::-webkit-scrollbar {
@@ -15,6 +16,28 @@ body::-webkit-scrollbar-track {
     background: #fcf9ed; /*스크롤바 뒷 배경 색상*/
 }
 
+/* 마우스 커서변경 */
+.mouse-cursor {
+    display: block;
+    z-index: 999;
+    width: 35px;
+    height: auto;
+    position: fixed;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    border-radius: 50%;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    visibility: hidden;
+}
+
+.mouse-cursor img {
+    width: 100%;
+    height: auto;
+}
+
+/* 인트로 */
 div#intro {
     z-index: 101;
     position: fixed;
@@ -105,6 +128,8 @@ div#intro .leaf:after {
 div#intro.hide + #main {
     display: block;
 }
+
+/* 메인 */
 #main {
     display: none;
     position: relative;
@@ -115,14 +140,7 @@ div#intro.hide + #main {
     padding: 40px 4%;
     box-sizing: border-box;
 }
-#main #clover {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
+
 #main .wrap {
     z-index: 1;
     position: relative;
@@ -133,6 +151,8 @@ div#intro.hide + #main {
     justify-content: center;
     gap: 4%;
 }
+
+/* 좌측 : 팀 소개영역 */
 #main .team-area {
     position: sticky;
     top: 40px;
@@ -182,6 +202,7 @@ div#intro.hide + #main {
     color: #fcf9ed;
 }
 
+/* 우측 : 멤버 리스트 */
 #main #mem-area {
     display: flex;
     flex-direction: column;
@@ -210,6 +231,7 @@ div#intro.hide + #main {
     overflow: hidden;
 }
 #main .mem-img a .hover-txt {
+    z-index: 1;
     position: absolute;
     top: 0;
     left: 0;
@@ -229,7 +251,8 @@ div#intro.hide + #main {
     opacity: 1;
 }
 #main .mem-img img {
-    width: 100%;
+    position: absolute;
+    height: 100%;
 }
 #main .mem-box .link {
     display: flex;
@@ -248,28 +271,34 @@ div#intro.hide + #main {
     transition: 0.5s;
 }
 #main .mem-box .link a:hover {
-    background-color: rgba(25,55,34,0.8);
+    background-color: rgba(25, 55, 34, 0.8);
 }
 
 #main .mem-box .link a img {
     width: 45px;
-    height:  auto;
+    height: auto;
     transition: 0.5s;
 }
 
-#main .mem-box .link a:hover img{
+#main .mem-box .link a:hover img {
     transform: scale(1.12);
 }
 
+/* 배경  */
+#main #clover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
 #clover svg {
-    /*   transform:scale(0); */
     transition: 1s ease-in-out;
     position: absolute;
 }
 #clover .animate {
-    /*   animation: blossom 2s ease-in-out 0s infinite alternate forwards running; */
-    /*   animation-name: blossom-1; */
-    /*   animation-duration: 2s; */
     animation-iteration-count: infinite;
     animation-fill-mode: forwards;
     animation-direction: alternate;

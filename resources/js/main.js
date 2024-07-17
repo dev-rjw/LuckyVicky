@@ -1,39 +1,44 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let startIntro = setInterval(intro,300);
-    
-    setTimeout(function(){
+    //인트로 실행
+    let startIntro = setInterval(intro, 300);
+    setTimeout(function () {
         clearInterval(startIntro);
         startIntro = null;
 
-        document.querySelector('.intro-txt').classList.add('show')
-    },900);
+        document.querySelector(".intro-txt").classList.add("show");
+    }, 900);
+    setTimeout(function () {
+        document.getElementById("intro").classList.add("hide");
+    }, 3000);
 
-    setTimeout(function(){
-        document.getElementById('intro').classList.add('hide')
-    },3000);
+    //배경 실행
+    blossom();
 
-    blossom()
+    //마우스 커서 실행
+    waxon_tm_cursor();
 });
 
+// 인트로
 let leafNum = 1;
-function intro(){
+function intro() {
     let leaf = document.getElementById("leaf");
     let newLeaf = leaf.cloneNode(true);
 
-    newLeaf.id = 'leaf' + leafNum;
-    newLeaf.style.transform = "rotate(" + 90*leafNum+ "deg)"
-    document.getElementById('loading').append(newLeaf)
-    leafNum++
+    newLeaf.id = "leaf" + leafNum;
+    newLeaf.style.transform = "rotate(" + 90 * leafNum + "deg)";
+    document.getElementById("loading").append(newLeaf);
+    leafNum++;
 }
 
-function blossom(){
-    let background = document.getElementById("clover")
-    
-    for(var i=0;i<20;i++) {
-        var s=Math.floor(Math.random()*10);
-        var t=Math.floor(Math.random()*4000+1000);
-        var x=Math.random()*100;
-        var y=Math.random()*80;
+// 배경 네잎클로버
+function blossom() {
+    let background = document.getElementById("clover");
+
+    for (var i = 0; i < 20; i++) {
+        var s = Math.floor(Math.random() * 10);
+        var t = Math.floor(Math.random() * 4000 + 1000);
+        var x = Math.random() * 100;
+        var y = Math.random() * 80;
         let clover = `
             <svg width="172px" height="172px" viewBox="0 0 172 172" style="top: ${x}%;left: ${y}%;animation-name:blossom-${s}; animation-duration:${t}ms;" class="animate">
                 <g transform="translate(36.000000, 0.000000)">
@@ -54,7 +59,24 @@ function blossom(){
                     <path d="M50,9.16532067 C75.2536706,-13.4843611 115.738059,9.33932356 93.6164857,39.6288395 C80.6531579,57.3786136 62.7999657,68.2812276 50,86" fill="#FFFFFF" opacity="0.1"></path>
                 </g>
             </svg>
-            `
-        background.insertAdjacentHTML("afterbegin",clover)
+            `;
+        background.insertAdjacentHTML("afterbegin", clover);
     }
-};
+}
+
+// 마우스 커서
+function waxon_tm_cursor() {
+    let myCursor = document.querySelector(".mouse-cursor");
+
+    if (document.querySelector(".mouse-cursor")) {
+        if (document.querySelector("body")) {
+            const e = document.querySelector(".mouse-cursor");
+            let n,
+                i = 0,
+                o = !1;
+            (window.onmousemove = function (s) {
+                o || (e.style.transform = "translate(" + s.clientX + "px, " + s.clientY + "px)"), (n = s.clientY), (i = s.clientX), (e.style.visibility = "visible");
+            });
+        }
+    }
+}

@@ -77,7 +77,7 @@
             let github = row['github'];
             let blog = row['blog'];
             let index = row['index'];
-            let profile = row['image'][0]
+            let profile = row['image'][0];
             let blogIcon;
 
             if( blog.indexOf("github") != -1 ){
@@ -86,14 +86,14 @@
                 blogIcon = "velog";
             } else {
                 blogIcon = "tstory";
-            }
+            };
 
             let box_html = `
                 <div class="mem-box">
                     <div class="mem-img">
                         <a href="./subPage.html?index=${index}">
-                            <span class="hover-txt">${name}</span>
-                            <img src="${profile}" onerror="https://www.studiopeople.kr/common/img/default_profile.png" alt="프로필 이미지">
+                            <span class="hover-txt">${name}🍀</span>
+                            <img src="${profile}" alt="프로필 이미지">
                         </a>
                     </div>
 
@@ -102,13 +102,17 @@
                         <a href="${github}" target="_blank" class="github"><img src="./resources/images/github.svg" alt="깃허브 로고"></a>
                     </div>
                 </div>
-            `
+            `;
 
-             document.getElementById('mem-area').insertAdjacentHTML("afterbegin",box_html)
+             document.getElementById('mem-area').insertAdjacentHTML("afterbegin",box_html);
         })
     </script>
 
+    
+    <!-- 마우스 포인터 -->
+	<div class="mouse-cursor"><img src="./resources/images/clover.png" alt="마우스커서"></div>
 
+    <!-- 인트로 -->
     <div id="intro">
         <div id="loading">
             <div id="leaf" class="leaf">
@@ -118,8 +122,12 @@
         <div class="intro-txt">Lucky Vicky!</div>
     </div>
 
+
+    
+    <!-- 메인 -->
     <div id="main">
         <div class="wrap">
+            <!-- 좌측 : 팀 소개영역 -->
             <div class="team-area">
                 <div class="title">
                     <h2>🍀뭐야? 에서 뭐를 맡은 자들🍀</h2>
@@ -150,9 +158,12 @@
                 </div>
             </div>
 
+            <!-- 우측 : 멤버 리스트 -->
             <div id="mem-area">
             </div>
         </div>
+
+        <!-- 배경 -->
         <div id="clover"></div>
     </div>
 </body>

@@ -218,7 +218,7 @@ div#intro.hide + #main {
     gap: 24px;
 }
 #main .mem-img {
-    flex-basis: 0;
+    flex-basis: 100%;
 }
 #main .mem-img a {
     position: relative;

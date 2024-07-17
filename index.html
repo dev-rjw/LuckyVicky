@@ -76,6 +76,8 @@
             let name = row['name'];
             let github = row['github'];
             let blog = row['blog'];
+            let index = row['index'];
+            let profile = row['image'][0]
             let blogIcon;
 
             if( blog.indexOf("github") != -1 ){
@@ -89,9 +91,9 @@
             let box_html = `
                 <div class="mem-box">
                     <div class="mem-img">
-                        <a href="./subPage.html">
+                        <a href="./subPage.html?index=${index}">
                             <span class="hover-txt">${name}</span>
-                            <img src="https://www.studiopeople.kr/common/img/default_profile.png" alt="프로필 이미지">
+                            <img src="${profile}" onerror="https://www.studiopeople.kr/common/img/default_profile.png" alt="프로필 이미지">
                         </a>
                     </div>
 

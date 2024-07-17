@@ -271,7 +271,7 @@ div#intro.hide + #main {
     transition: 0.5s;
 }
 #main .mem-box .link a:hover {
-    background-color: rgba(25, 55, 34, 0.8);
+    background-color: rgba(0, 115, 27, 0.6);
 }
 
 #main .mem-box .link a img {

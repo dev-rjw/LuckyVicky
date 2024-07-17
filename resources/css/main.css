@@ -209,6 +209,7 @@ div#intro.hide + #main {
     gap: 40px;
     width: 40%;
     max-width: 600px;
+    min-width: 300px;
     margin-top: 60px;
 }
 
@@ -217,8 +218,7 @@ div#intro.hide + #main {
     gap: 24px;
 }
 #main .mem-img {
-    width: 65%;
-    flex-shrink: 0;
+    flex-basis: 0;
 }
 #main .mem-img a {
     position: relative;

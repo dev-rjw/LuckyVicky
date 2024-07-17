@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     blossom();
 
     //마우스 커서 실행
-    waxon_tm_cursor();
+    cursorPointer();
 });
 
 // 인트로
@@ -65,18 +65,16 @@ function blossom() {
 }
 
 // 마우스 커서
-function waxon_tm_cursor() {
-    let myCursor = document.querySelector(".mouse-cursor");
-
+function cursorPointer() {
     if (document.querySelector(".mouse-cursor")) {
         if (document.querySelector("body")) {
             const e = document.querySelector(".mouse-cursor");
             let n,
                 i = 0,
                 o = !1;
-            (window.onmousemove = function (s) {
+            window.onmousemove = function (s) {
                 o || (e.style.transform = "translate(" + s.clientX + "px, " + s.clientY + "px)"), (n = s.clientY), (i = s.clientX), (e.style.visibility = "visible");
-            });
+            };
         }
     }
 }

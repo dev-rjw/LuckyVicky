@@ -101,7 +101,6 @@ div#intro .leaf:after {
     }
 }
 
-
 div#intro.hide + #main {
     display: block;
 }
@@ -112,6 +111,7 @@ div#intro.hide + #main {
     width: 100%;
     min-height: 100vh;
     padding: 40px 4%;
+    box-sizing: border-box;
 }
 #main #clover {
     position: absolute;
@@ -144,7 +144,7 @@ div#intro.hide + #main {
 }
 #main .title h2 {
     margin: 0;
-    font-size: calc(1.325rem + .4vw);
+    font-size: calc(1.325rem + 0.4vw);
     font-weight: 700;
     color: #193722;
 }
@@ -180,7 +180,7 @@ div#intro.hide + #main {
     color: #fcf9ed;
 }
 
-#main .mem-area {
+#main #mem-area {
     display: flex;
     flex-direction: column;
     gap: 40px;

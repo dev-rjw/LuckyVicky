@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     let startIntro = setInterval(intro,300);
+    
     setTimeout(function(){
         clearInterval(startIntro);
         startIntro = null;

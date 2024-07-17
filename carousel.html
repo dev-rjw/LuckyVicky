@@ -54,7 +54,7 @@
                 display: flex;
                 width: 100%;
                 transform: translate3d(0px, 0px, 0px);
-                transition-duration: 300ms;
+                transition-duration: 500ms;
             }
             .carousel-slide-item {
                 max-height: 400px;
@@ -63,18 +63,37 @@
                 overflow: clip;
                 pointer-events: auto;
                 transition: transform 0.3s ease;
+                border-radius: 10px;
+                overflow: hidden;
             }
             #carousel-thumb {
                 display: flex;
                 gap: 10px;
             }
             .carousel-thumb-item {
+                position: relative;
                 flex: 1;
                 cursor: pointer;
+                border-radius: 5px;
+                overflow: hidden;
             }
-            .carousel-thumb-item.curr {
+            .carousel-thumb-item:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+                background: rgba(0, 0, 0, 0.35);
+                transition: all 0.5s ease 0.15s;
+            }
+            .carousel-thumb-item.curr::before {
                 /* 인터렉션은 추후 디자인 확인 후 적용 */
-                border: 2px solid red;
+                left: auto;
+                right: 0;
+                width: 0;
+                transition: all 0.5s ease;
             }
         </style>
         <!--// carousel css 종료 -->
@@ -109,6 +128,8 @@
                 const carouselThumb = document.getElementById("carousel-thumb");
                 const carouselThumbItems = document.querySelectorAll(".carousel-thumb-item");
                 const carouselBtnArea = document.getElementById("carousel-btn-area");
+                const carouselBtnPrev = document.getElementById("btn-prev");
+                const carouselBtnNext = document.getElementById("btn-next");
 
                 let slideWid; // 슬라이드 넓이 값
                 let slideAllWid; // 슬라이드 요소 전체 넓이 값
@@ -139,18 +160,14 @@
                 };
                 carouselSlideMove();
 
-                // 슬라이드 썸네일 기능 적용
+                // 슬라이드 썸네일 클릭 기능
                 carouselThumbItems.forEach((item, idx) => {
                     // 썸네일 클릭 이벤트
                     item.addEventListener("click", () => {
-                        clearInterval(slideMoveTimer); // 롤링 초기화 하기 위해 멈춰줌
+                        clearInterval(slideMoveTimer); // 롤링 초기화
 
-                        // 클릭한 요소가 엑티브가 되어야 해서 초기화해줬습니다.
-                        carouselThumbItems.forEach((thumb) => {
-                            thumb.classList.remove("curr");
-                        });
-                        // 클릭한 요소 엑티브
-                        item.classList.add("curr");
+                        carouselThumbItems.forEach((thumb) => thumb.classList.remove("curr")); // 엑티브 초기화
+                        item.classList.add("curr"); // 클릭한 요소 엑티브
 
                         //클릭한 요소에 맞춰 슬라이드 이동 : carouselSlide의 transform3d의 값을 클릭한 요소의 -(인덱스*슬라이드) 넓이로 적용
                         carouselSlide.style.transform = `translate3d(-${idx * slideWid}px, 0px, 0px)`;
@@ -160,15 +177,44 @@
                     });
                 });
 
+                // 현재 인덱스 값에 맞춰 썸네일 엑티브
+                const carouselThumbSet = () => {
+                    carouselThumbItems.forEach((thumb) => thumb.classList.remove("curr"));
+                    carouselThumbItems[slideCurrentIdx].classList.add("curr");
+                };
+
+                // 슬라이드 뒤로가기
+                const carouselPrevMove = () => {
+                    clearInterval(slideMoveTimer); // 롤링 초기화
+                    slideCurrentIdx == 0 ? (slideCurrentIdx = 4) : slideCurrentIdx--; // 슬라이드 맨 앞이면 마지막으로 이동
+                    carouselSlide.style.transform = `translate3d(-${slideCurrentIdx * slideWid}px, 0px, 0px)`;
+
+                    carouselThumbSet(); // 현재 인덱스 값에 맞춰 썸네일 엑티브
+                    carouselSlideMove(); // 다시 롤링 시작
+                };
+
+                // 슬라이드 앞으로가기
+                const carouselNextMove = () => {
+                    clearInterval(slideMoveTimer); // 롤링 초기화
+                    slideCurrentIdx == 4 ? (slideCurrentIdx = 0) : slideCurrentIdx++; // 슬라이드 마지막이면 맨 앞으로 이동
+                    carouselSlide.style.transform = `translate3d(-${slideCurrentIdx * slideWid}px, 0px, 0px)`;
+
+                    carouselThumbSet(); // 현재 인덱스 값에 맞춰 썸네일 엑티브
+                    carouselSlideMove(); // 다시 롤링 시작
+                };
+
+                carouselBtnPrev.addEventListener("click", carouselPrevMove); // 이전 버튼 클릭
+                carouselBtnNext.addEventListener("click", carouselNextMove); // 다음 버튼 클릭
+
                 /*****************************************
                  **************** 드래그 기능 ****************
                  ******************************************
                  **/
-                let isDragChk = false; // mousemove를 드래그 기능 체크
-                let downClientX;
-                let upClientX;
-                let posStart; // 드래그 시작 했을 때 좌,우 판별 체크
-                let posEnd; // 드래그 종료 했을 때 좌,우 판별 체크
+                let isDragChk = false; // [drag] 초기화
+                let downClientX; // [drag] 마우스 클릭했을 때 포인터 위치
+                let upClientX; // [drag] 마우스 땟을 때 포인터 위치
+                let posStart; // [drag] 시작 했을 때 좌,우 판별 체크
+                let posEnd; // [drag] 종료 했을 때 좌,우 판별 체크
 
                 carouselSlide.addEventListener("mousedown", (e) => {
                     //console.log("[1] mousedown : 마우스 클릭했을 때");
@@ -177,48 +223,35 @@
 
                     // 마우스 클릭한 영역이 오른쪽인지 왼쪽인지 구분, mouseup이벤트에서 전달받아 마우스 땟을 때 위치를 추가로 확인 후 슬라이드 기능 적용
                     slideWid / 2 > downClientX ? (posStart = -1) : (posStart = 1);
-
-                    // 큰이미지 영역에서 마우스 이벤트 발생할 때, 50% 기준으로 나눴는데 (오른쪽을 누르고도 오른쪽 액션할 경우 문제가 생겻음)
-                    // 마우스 오버이벤트 일 때, 첫 클릭한 기준 값 오버할 때 한번더 if 문으로 체크함, 그리고 마우스 땟을 때 아래의 코드가 실행 해야함
-                    // carouselSlide.style.transform = `translate3d(-${slideCurrentIdx * slideWid}px, 0px, 0px)`;
                 });
+
                 carouselSlide.addEventListener("mouseup", (e) => {
                     // 이미지 들어가면 실행이 안되가지고 css 에서 img에 user-drag: none; 넣어줘야함
                     // console.log("[2] mouseup : 마우스 땟을 때");
                     isDragChk = false;
                     upClientX = e.clientX;
 
-                    // 마우스 땟을 때 오른쪽
-                    slideWid / 2 > upClientX ? (posEnd = -1) : (posEnd = 1);
-
-                    if (downClientX > upClientX) {
-                        // 오른쪽으로 슬라이드
-                        slideCurrentIdx == 4 ? (slideCurrentIdx = 0) : slideCurrentIdx++;
-                    } else {
-                        // 왼쪽으로 슬라이드
-                        slideCurrentIdx == 0 ? (slideCurrentIdx = 4) : slideCurrentIdx--;
-                    }
+                    slideWid / 2 > upClientX ? (posEnd = -1) : (posEnd = 1); // 마우스 땟을 때 좌,우 확인
+                    downClientX > upClientX ? carouselNextMove() : carouselPrevMove(); // 슬라이드 이동
 
                     carouselSlide.style.transform = `translate3d(-${slideCurrentIdx * slideWid}px, 0px, 0px)`;
-                    // 클릭한 요소가 엑티브가 되어야 해서 초기화해줬습니다.
-                    carouselThumbItems.forEach((thumb) => {
-                        thumb.classList.remove("curr");
-                    });
-                    // 클릭한 요소 엑티브
-                    carouselThumbItems[slideCurrentIdx].classList.add("curr");
+                    carouselThumbSet(); // 현재 인덱스 값에 맞춰 썸네일 엑티브
                 });
-                carouselWrap.addEventListener("mousemove", (e) => {
+
+                carouselSlide.addEventListener("mousemove", (e) => {
                     if (isDragChk) {
                         //console.log("[3] mousemove : 마우스 이동할 때");
                         //console.log(e);
                     }
                 });
+
                 carouselSlide.addEventListener("mouseover", (e) => {
                     // console.log("[4] mouseover : 마우스 들어올 때");
                     // 자동 슬라이드 종료
                     clearInterval(slideMoveTimer);
                     isDragChk = false;
                 });
+
                 carouselSlide.addEventListener("mouseleave", (e) => {
                     // console.log("[5]mouseleave : 마우스 떠날 때");
                     isDragChk = false;
@@ -275,7 +308,10 @@
                 <!-- carousel-thumb -->
 
                 <!-- btn-area -->
-                <div id="carousel-btn-area"></div>
+                <div id="carousel-btn-area">
+                    <button type="button" id="btn-prev">이전</button>
+                    <button type="button" id="btn-next">다음</button>
+                </div>
                 <!--// btn-area -->
             </div>
         </div>

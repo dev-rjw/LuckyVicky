@@ -16,17 +16,17 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="럭7ㅣ비7ㅣ" />
     <meta property="og:description" content="럭7ㅣ비7ㅣ" />
-    <meta property="og:image" content="/resources/images/og.jpg" />
+    <meta property="og:image" content="./resources/images/og.jpg" />
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="/resources/images/favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/resources/images/favicon/apple-icon-180x180.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/resources/images/favicon/android-icon-192x192.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/resources/images/favicon/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="96x96" href="/resources/images/favicon/favicon-96x96.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon/favicon-16x16.png" />
-    <link rel="manifest" href="/resources/images/favicon/manifest.json" />
-    <meta name="msapplication-TileImage" content="/resources/images/favicon/ms-icon-144x144.png" />
+    <link rel="shortcut icon" href="./resources/images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./resources/images/favicon/apple-icon-180x180.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./resources/images/favicon/android-icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./resources/images/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="./resources/images/favicon/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./resources/images/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="./resources/images/favicon/manifest.json" />
+    <meta name="msapplication-TileImage" content="./resources/images/favicon/ms-icon-144x144.png" />
     <meta name="msapplication-TileColor" content="#006DD1" />
     <meta name="theme-color" content="#006DD1" />
 
@@ -80,9 +80,9 @@
             let profile = row['image'][0];
             let blogIcon;
 
-            if( blog.indexOf("github") != -1 ){
+            if (blog.indexOf("github") != -1) {
                 blogIcon = "github-io";
-            } else if ( blog.indexOf("velog") != -1  ){
+            } else if (blog.indexOf("velog") != -1) {
                 blogIcon = "velog";
             } else {
                 blogIcon = "tstory";
@@ -93,7 +93,7 @@
                     <div class="mem-img">
                         <a href="./subPage.html?index=${index}">
                             <span class="hover-txt">${name}🍀</span>
-                            <img src="${profile}" alt="프로필 이미지">
+                            <img src="${profile}" onerror="this.src='https://www.studiopeople.kr/common/img/default_profile.png'" alt="프로필 이미지">
                         </a>
                     </div>
 
@@ -104,13 +104,13 @@
                 </div>
             `;
 
-             document.getElementById('mem-area').insertAdjacentHTML("afterbegin",box_html);
+            document.getElementById('mem-area').insertAdjacentHTML("afterbegin", box_html);
         })
     </script>
 
-    
+
     <!-- 마우스 포인터 -->
-	<div class="mouse-cursor"><img src="./resources/images/clover.png" alt="마우스커서"></div>
+    <div class="mouse-cursor"><img src="./resources/images/clover.png" alt="마우스커서"></div>
 
     <!-- 인트로 -->
     <div id="intro">
@@ -123,7 +123,6 @@
     </div>
 
 
-    
     <!-- 메인 -->
     <div id="main">
         <div class="wrap">

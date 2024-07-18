@@ -1,0 +1,366 @@
+body {
+    cursor: none;
+    font-family: "Pretendard", "Noto Sans KR", "Nanum Gothic", "Apple SD Gothic Neo", Helvetica, Arial, sans-serif;
+    background-color: #f4ffe6;
+}
+body::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+body::-webkit-scrollbar-thumb {
+    background: rgba(25, 55, 34, 0.5); /* 스크롤바 색상 */
+    border-radius: 8px; /* 스크롤바 둥근 테두리 */
+}
+body::-webkit-scrollbar-track {
+    background: #fcf9ed; /*스크롤바 뒷 배경 색상*/
+}
+
+/* 마우스 커서변경 */
+.mouse-cursor {
+    display: block;
+    z-index: 999;
+    width: 35px;
+    height: auto;
+    position: fixed;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    border-radius: 50%;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    visibility: hidden;
+}
+.mouse-cursor img {
+    width: 100%;
+    height: auto;
+}
+
+/* 배경  */
+#clover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+#clover svg {
+    transition: 1s ease-in-out;
+    position: absolute;
+}
+#clover .animate {
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+    animation-direction: alternate;
+}
+@keyframes blossom-0 {
+    0% {
+        transform: scale(0) rotate(0);
+    }
+    100% {
+        transform: scale(0.5) rotate(30deg);
+    }
+}
+@keyframes blossom-1 {
+    0% {
+        transform: scale(0) rotate(0);
+    }
+    100% {
+        transform: scale(0.45) rotate(60deg);
+    }
+}
+@keyframes blossom-2 {
+    0% {
+        transform: scale(0) rotate(0);
+    }
+    100% {
+        transform: scale(0.4) rotate(45deg);
+    }
+}
+@keyframes blossom-3 {
+    0% {
+        transform: scale(0) rotate(0);
+    }
+    100% {
+        transform: scale(0.36) rotate(30deg);
+    }
+}
+@keyframes blossom-4 {
+    0% {
+        transform: scale(0) rotate(0);
+    }
+    100% {
+        transform: scale(0.3) rotate(45deg);
+    }
+}
+@keyframes blossom-5 {
+    0% {
+        transform: scale(0) rotate(0);
+    }
+    100% {
+        transform: scale(0.25) rotate(60deg);
+    }
+}
+@keyframes blossom-6 {
+    0% {
+        transform: scale(0) rotate(0);
+    }
+    100% {
+        transform: scale(0.2) rotate(30deg);
+    }
+}
+@keyframes blossom-7 {
+    0% {
+        transform: scale(0) rotate(0);
+    }
+    100% {
+        transform: scale(0.15) rotate(60deg);
+    }
+}
+@keyframes blossom-8 {
+    0% {
+        transform: scale(0) rotate(0);
+    }
+    100% {
+        transform: scale(0.1) rotate(45deg);
+    }
+}
+@keyframes blossom-9 {
+    0% {
+        transform: scale(0) rotate(0);
+    }
+    100% {
+        transform: scale(0.33) rotate(30deg);
+    }
+}
+
+/* header, footer */
+.header,
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header {
+    padding: 30px 0;
+}
+.logo {
+    display: flex;
+    width: 80px;
+    height: 70px;
+}
+.logo a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-image: url(../images/logo.png);
+    background-position: 50% 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.footer {
+    padding: 60px 0 30px;
+}
+.copyright {
+    font-size: 16px;
+    color: #7aa5eb;
+}
+
+/* container */
+#sub-section {
+    width: 100%;
+    max-width: calc(1280px + 24px);
+    margin: 0 auto;
+    padding: 0 12px;
+    background-color: rgba(244, 255, 230, 0.8);
+}
+/* tab */
+.tab-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-bottom: 40px;
+}
+.tab-column {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border-radius: 8px;
+}
+.tab-column img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 100%;
+    opacity: 1;
+    transition: opacity ease 0.4s;
+}
+.tab-column::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 1;
+}
+.tab-hover-txt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    opacity: 0;
+    transition: opacity ease 0.3s;
+}
+.tab-column:hover img,
+.tab-column:not(.tab-active) img {
+    opacity: 0.5;
+    filter: blur(1px);
+}
+.tab-column:hover .tab-hover-txt,
+.tab-column:not(.tab-active) .tab-hover-txt {
+    opacity: 1;
+}
+#sub-section .view {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 30px;
+}
+#sub-section .view .left-area,
+#sub-section .view .right-area {
+    width: 100%;
+}
+#sub-section .view .left-area {
+    display: flex;
+    justify-content: center;
+}
+@media (min-width: 992px) {
+    #sub-section .view {
+        flex-direction: row;
+    }
+    #sub-section .view .left-area,
+    #sub-section .view .right-area {
+        max-width: 600px;
+    }
+}
+
+/* 날씨 */
+.weather-card-wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 4px;
+}
+.weather-card {
+    display: inline-flex;
+    align-items: center;
+    min-width: 200px;
+    min-height: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #7aa5eb;
+    padding: 0 8px 0 16px;
+    border-radius: 8px;
+}
+.weather-card-tit {
+    font-weight: 700;
+    color: #fff;
+    margin-right: 12px;
+}
+.weather-card-icon {
+    max-width: 50px;
+}
+
+/* 정보 */
+.name-description-wrap {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+#name {
+    font-size: 50px;
+    font-weight: 800;
+    margin-bottom: 30px;
+}
+#mbti {
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 600;
+    color: #59c095;
+    margin-left: 10px;
+}
+#description {
+    font-size: 20px;
+    font-weight: 500;
+}
+.info-list-wrap {
+    margin-bottom: 40px;
+}
+.info-list > li {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 24px;
+}
+.info-list > li:first-child {
+    padding-top: 0;
+}
+.info-list-tit {
+    width: 100px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #59c095;
+}
+.info-list-txt {
+    width: calc(100% - 100px);
+    padding-left: 16px;
+}
+.info-btn-wrap {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+.info-btn-left {
+    display: flex;
+}
+
+/* 좋아요 */
+#like-btn-area {
+    display: inline-flex;
+}
+.like-btn {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #59C095;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: all ease 0.4s;
+}
+.like-btn:hover {
+    border: 10px solid #59C095;
+}
+.like-icon {
+    position: relative;
+    line-height: 1;
+    margin-top: 2px;
+}
+.like-text {
+    font-size: 14px;
+    font-weight: 500;
+}

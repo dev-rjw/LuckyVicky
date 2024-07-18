@@ -442,6 +442,7 @@
                 var parameters = herfName.slice(herfName.indexOf("?") + 1, herfName.length);
                 var valName = parameters.split("=")[1]; // index의 값
 
+                if (valName == undefined) valName = 0;
                 let docs = await getDocs(collection(db, "description")); // firebase에서 description 값 가져오기
 
                 const temp = document.querySelector(".temp");

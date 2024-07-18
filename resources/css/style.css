@@ -41,10 +41,83 @@ body {
     margin: 5px 5% 0 51%;
     border: 2px solid green;
 } */
-#sub-section {width:100%; max-width:1280px; margin:0 auto;}
-.tabRow {display: flex; align-items: center; gap: 10px;}
-.tabRow .tabColumn {width:25%; cursor: pointer;}
-.tabRow .tabColumn img {width:100%;}
-#sub-section .view {display:flex; gap:30px;}
-#sub-section .view .left-area {width:100%; max-width:600px;}
-#sub-section .view .right-area {width:calc(100% - 630px)}
+#sub-section {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+.tabRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.tabRow .tabColumn {
+    width: 25%;
+    cursor: pointer;
+}
+.tabRow .tabColumn img {
+    width: 100%;
+}
+#sub-section .view {
+    display: flex;
+    gap: 30px;
+}
+#sub-section .view .left-area {
+    width: 100%;
+    max-width: 600px;
+}
+#sub-section .view .right-area {
+    width: calc(100% - 630px);
+}
+
+/* 날씨 */
+.weather-card {
+    display: inline-flex;
+    align-items: center;
+    min-width: 200px;
+    min-height: 50px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #bbb;
+    padding: 0 12px 0 16px;
+    border-radius: 6px;
+}
+.weather-card-tit {
+    font-weight: 700;
+    margin-right: 12px;
+}
+.weather-card-icon {
+    max-width: 50px;
+}
+
+/* 좋아요 */
+#like-btn-area {
+    display: inline-flex;
+}
+.like-btn {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    font-size: 16px;
+    color: #333;
+    background-color: transparent;
+    border-radius: 100%;
+    border: 1px solid #bbb;
+    cursor: pointer;
+    /* transition: all ease 0.1s; */
+    font-family: "Pretendard", "Noto Sans KR", "Nanum Gothic", "Apple SD Gothic Neo", Helvetica, Arial, sans-serif;
+}
+.like-btn:hover {
+    border: 1px solid #333;
+}
+.like-icon {
+    position: relative;
+    margin-top: 2px;
+}
+.like-text {
+    font-size: 14px;
+    font-weight: 500;
+}

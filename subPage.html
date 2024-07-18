@@ -26,11 +26,12 @@
         <link rel="icon" type="image/png" sizes="16x16" href="./resources/images/favicon/favicon-16x16.png" />
         <link rel="manifest" href="./resources/images/favicon/manifest.json" />
         <meta name="msapplication-TileImage" content="./resources/images/favicon/ms-icon-144x144.png" />
-        <meta name="msapplication-TileColor" content="#006DD1" />
-        <meta name="theme-color" content="#006DD1" />
+        <meta name="msapplication-TileColor" content="#333" />
+        <meta name="theme-color" content="#333" />
 
         <!-- 스타일 -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <link href="./resources/css/style.css" rel="stylesheet" />
         <link href="./resources/css/carousel.css" rel="stylesheet" />
     </head>
@@ -83,9 +84,17 @@
                                 <!--// carousel-wrap -->
                             </div>
                             <div class="right-area">
+                                <div class="weather-card">
+                                    <div class="weather-card-tit"><span class="weather-card-city-name">오늘</span>의 날씨</div>
+                                    <div class="weather-card-text">☀️☁️❄️☔</div>
+                                    <img class="weather-card-icon" />
+                                </div>
+
                                 <div class="list">
                                     <div class="temp" style="display: none"></div>
                                 </div>
+
+                                <div id="like-btn-area"></div>
                             </div>
                         </div>
                     </section>
@@ -102,6 +111,7 @@
             import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
             import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
             import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+            import { doc, updateDoc, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
             const firebaseConfig = {
                 apiKey: "AIzaSyCmKJSlgO0ueisoj66FA_rOUTzNv8YzJ3o",
@@ -257,6 +267,7 @@
 
                 const img = document.querySelector(".tabRow");
                 const tabs = document.querySelectorAll(".tabColumn");
+
                 tabs.forEach((target) => {
                     target.addEventListener("click", async function (image) {
                         slideReset();
@@ -270,6 +281,7 @@
 
                         docs.forEach((doc) => {
                             let row = doc.data();
+                            let docId = doc.id;
 
                             if (row["index"] == image.target.id) {
                                 let name = row["name"];
@@ -280,6 +292,9 @@
                                 let blog = row["blog"];
                                 let github = row["github"];
                                 let imgs = row["image"];
+                                let index = row["index"];
+                                let likes = row["likes"];
+                                let city = row["city"];
 
                                 const temp = document.createElement("div");
                                 temp.className = "temp";
@@ -302,12 +317,74 @@
                                 `;
                                 document.querySelector(".list").append(temp);
                                 createSlides(imgs);
+
+                                createLikeBtn(index, likes, docId);
+                                getWeather(city);
                             }
                         });
                         isSlide = true;
                         if (isSlide) handleSlideStart();
                     });
                 });
+
+                // 좋아요 버튼 생성
+                function createLikeBtn(index, likes, docId) {
+                    const likeBtnArea = document.getElementById("like-btn-area");
+                    likeBtnArea.innerHTML = `
+                        <button class="like-btn like-btn-${index}">
+                            <div class="like-icon">
+                                <span class="material-symbols-rounded"> thumb_up </span>
+                            </div>
+                            <span class="like-text">${likes}</span>
+                        </button>
+                    `;
+                    const likeBtnIndex = document.querySelector(`.like-btn-${index}`);
+                    likeBtnIndex.addEventListener("click", function () {
+                        incrementLike(docId);
+                    });
+
+                    // 실시간 업데이트 리스너 설정
+                    let likesRef = doc(db, "description", docId);
+                    onSnapshot(likesRef, (doc) => {
+                        let updatedLikes = doc.data().likes;
+                        let likeText = document.querySelector(`.like-btn-${index} .like-text`);
+                        likeText.innerText = updatedLikes;
+                    });
+                }
+
+                // 좋아요 증가
+                async function incrementLike(docId) {
+                    let likesRef = doc(db, "description", docId);
+                    await updateDoc(likesRef, {
+                        likes: increment(1),
+                    });
+                }
+
+                // 날씨 API
+                const getWeather = (city) => {
+                    const API_KEY = "14488ab08a4c1877a39b16a8f809ecc8";
+                    const cityName = city;
+                    const weatherCardCityName = document.querySelector(".weather-card-city-name");
+                    const weatherCardText = document.querySelector(".weather-card-text");
+                    const weatherCardIcon = document.querySelector(".weather-card-icon");
+
+                    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric&lang=kr`)
+                        // json으로 변환
+                        .then((response) => {
+                            return response.json();
+                        })
+                        // json 데이터 가져오기
+                        .then((json) => {
+                            const name = json.name;
+                            const description = json.weather[0].description;
+                            const icon = json.weather[0].icon;
+                            const iconURL = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+
+                            weatherCardCityName.innerText = name;
+                            weatherCardText.innerText = description;
+                            weatherCardIcon.setAttribute("src", iconURL);
+                        });
+                };
             };
         </script>
         <!-- <script src="./resources/js/carousel.js"></script> -->

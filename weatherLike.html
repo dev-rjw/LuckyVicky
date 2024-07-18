@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="content-language" content="ko" />
+        <meta name="viewport" content="initial-scale=1.0,user-scalable=yes,maximum-scale=3,width=device-width" />
+
+        <title>럭7ㅣ비7ㅣ</title>
+        <meta name="title" content="럭7ㅣ비7ㅣ" />
+        <meta name="subject" content="럭7ㅣ비7ㅣ" />
+        <meta name="author" content="럭7ㅣ비7ㅣ" />
+        <meta name="copyright" content="럭7ㅣ비7ㅣ" />
+        <meta name="description" content="럭7ㅣ비7ㅣ" />
+        <meta name="keywords" content="럭7ㅣ비7ㅣ" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="럭7ㅣ비7ㅣ" />
+        <meta property="og:description" content="럭7ㅣ비7ㅣ" />
+        <meta property="og:image" content="/resources/images/og.jpg" />
+
+        <!-- favicon -->
+        <link rel="shortcut icon" href="/resources/images/favicon/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/resources/images/favicon/apple-icon-180x180.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/resources/images/favicon/android-icon-192x192.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/resources/images/favicon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="96x96" href="/resources/images/favicon/favicon-96x96.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon/favicon-16x16.png" />
+        <link rel="manifest" href="/resources/images/favicon/manifest.json" />
+        <meta name="msapplication-TileImage" content="/resources/images/favicon/ms-icon-144x144.png" />
+        <meta name="msapplication-TileColor" content="#333" />
+        <meta name="theme-color" content="#333" />
+
+        <!-- 스타일 -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link href="/resources/css/style.css" rel="stylesheet" />
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            .weather-card {
+                display: inline-flex;
+                align-items: center;
+                min-width: 189px;
+                min-height: 50px;
+                font-size: 16px;
+                color: #fff;
+                background-color: #bbb;
+                padding-left: 16px;
+                padding-right: 4px;
+                border-radius: 6px;
+            }
+            .weather-card-tit {
+                font-weight: 700;
+                margin-right: 12px;
+            }
+            .weather-card-icon {
+                width: 50px;
+            }
+
+            #like-btn-area{
+                display: inline-flex;
+            }
+            .like-btn {
+                display: inline-flex;
+                align-items: center;
+                font-size: 16px;
+                color: #bbb;
+                background-color: transparent;
+                padding: 4px;
+                border: 0;
+                cursor: pointer;
+                transition: all ease 0.1s;
+            }
+            .like-btn:hover {
+                color: #333;
+            }
+            .like-icon {
+                position: relative;
+            }
+            .like-icon .material-symbols-rounded:last-child {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
+                color: transparent;
+            }
+            .like-btn.clicked .like-icon .material-symbols-rounded:last-child {
+                top: -10;
+                animation: clicked 0.4s ease-in;
+                color: #333;
+            }
+            @keyframes clicked {
+                5%,
+                50% {
+                    top: 0px;
+                    color: transparent;
+                }
+                20% {
+                    color: #333;
+                }
+                40% {
+                    top: -10px;
+                    color: transparent;
+                }
+            }
+            .like-text {
+                margin-left: 4px;
+            }
+        </style>
+
+        <script>
+            window.onload = function () {
+                const API_KEY = "14488ab08a4c1877a39b16a8f809ecc8";
+                // 서울
+                const lat = "37.566826004661";
+                const lon = "126.978652258309";
+                const cityName = "Seoul";
+                const weatherCardCityName = document.querySelector(".weather-card-city-name");
+                const weatherCardText = document.querySelector(".weather-card-text");
+                const weatherCardIcon = document.querySelector(".weather-card-icon");
+
+                const getWeather = () => {
+                    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric&lang=kr`)
+                        // json으로 변환
+                        .then((response) => {
+                            return response.json();
+                        })
+                        // json 데이터 가져오기
+                        .then((json) => {
+                            const name = json.name;
+                            const description = json.weather[0].description;
+                            const icon = json.weather[0].icon;
+                            const iconURL = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+
+                            weatherCardCityName.innerText = name;
+                            weatherCardText.innerText = description;
+                            weatherCardIcon.setAttribute("src", iconURL);
+                        });
+                };
+                getWeather();
+            };
+        </script>
+        <script type="module">
+            // Firebase SDK 라이브러리 가져오기
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+            import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+            import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+            import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+            import { doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+            // Firebase 구성 정보 설정
+            const firebaseConfig = {
+                apiKey: "AIzaSyCmKJSlgO0ueisoj66FA_rOUTzNv8YzJ3o",
+                authDomain: "luckyvicky-a9ab7.firebaseapp.com",
+                projectId: "luckyvicky-a9ab7",
+                storageBucket: "luckyvicky-a9ab7.appspot.com",
+                messagingSenderId: "383119247900",
+                appId: "1:383119247900:web:27203ea025a377e295edd9",
+                measurementId: "G-CCN3JQ0KH2",
+            };
+
+            // Firebase 인스턴스 초기화
+            const app = initializeApp(firebaseConfig);
+            const db = getFirestore(app);
+        </script>
+    </head>
+    <body>
+        <div class="weather-card">
+            <div class="weather-card-tit"><span class="weather-card-city-name"></span>의 날씨</div>
+            <div class="weather-card-text">날씨</div>
+            <img class="weather-card-icon" />
+        </div>
+
+        <button id="like-btn">
+            <div class="like-icon">
+                <span class="material-symbols-rounded"> thumb_up </span>
+                <span class="material-symbols-rounded"> thumb_up </span>
+            </div>
+            <span class="like-text">0</span>
+        </button>
+    </body>
+</html>

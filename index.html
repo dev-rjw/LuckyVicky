@@ -112,7 +112,7 @@
         /* Total View 작업 소스 */
         let view = await getDocs(collection(db, "view"));
         let totalDoc = doc(db, "view", "total");
-        let totalView
+        let totalView;
         view.forEach((doc) => {
             let row = doc.data();
             totalView = row['view'];

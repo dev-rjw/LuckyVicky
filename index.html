@@ -54,6 +54,7 @@
         import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCmKJSlgO0ueisoj66FA_rOUTzNv8YzJ3o",
@@ -106,6 +107,22 @@
 
             document.getElementById('mem-area').insertAdjacentHTML("afterbegin", box_html);
         })
+
+
+        /* Total View 작업 소스 */
+        let view = await getDocs(collection(db, "view"));
+        let totalDoc = doc(db, "view", "total");
+        let totalView
+        view.forEach((doc) => {
+            let row = doc.data();
+            totalView = row['view'];
+        });
+
+        await updateDoc(totalDoc, {
+            view: totalView + 1
+        });
+
+        document.querySelector('.total').innerText = totalView + 1;
     </script>
 
 
@@ -129,6 +146,7 @@
             <!-- 좌측 : 팀 소개영역 -->
             <div class="team-area">
                 <div class="title">
+                    <div class="view">Total <span class="total"></span></div>
                     <h2>🍀뭐야? 에서 뭐를 맡은 자들🍀</h2>
                 </div>
 

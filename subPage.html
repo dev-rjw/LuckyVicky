@@ -173,6 +173,26 @@
                     carouselThumbItems[slideCurrentIdx].classList.add("curr");
                 };
 
+                // 슬라이드 뒤로가기
+                const carouselPrevMove = () => {
+                    clearInterval(slideMoveTimer); // 롤링 초기화
+                    slideCurrentIdx == 0 ? (slideCurrentIdx = 4) : slideCurrentIdx--; // 슬라이드 맨 앞이면 마지막으로 이동
+                    carouselSlide.style.transform = `translate3d(-${slideCurrentIdx * slideWid}px, 0px, 0px)`;
+
+                    carouselThumbSet(); // 현재 인덱스 값에 맞춰 썸네일 엑티브
+                    carouselSlideMove(); // 다시 롤링 시작
+                };
+
+                // 슬라이드 앞으로가기
+                const carouselNextMove = () => {
+                    clearInterval(slideMoveTimer); // 롤링 초기화
+                    slideCurrentIdx == 4 ? (slideCurrentIdx = 0) : slideCurrentIdx++; // 슬라이드 마지막이면 맨 앞으로 이동
+                    carouselSlide.style.transform = `translate3d(-${slideCurrentIdx * slideWid}px, 0px, 0px)`;
+
+                    carouselThumbSet(); // 현재 인덱스 값에 맞춰 썸네일 엑티브
+                    carouselSlideMove(); // 다시 롤링 시작
+                };
+
                 // 슬라이드 시작
                 const handleSlideStart = () => {
                     // 슬라이드 리스트 초기 넓이 세팅
@@ -198,48 +218,31 @@
 
                     carouselBtnPrev.addEventListener("click", carouselPrevMove); // 이전 버튼 클릭
                     carouselBtnNext.addEventListener("click", carouselNextMove); // 다음 버튼 클릭
-
-                    let isDragChk = false; // [drag] 초기화
-                    let downClientX; // [drag] 마우스 클릭했을 때 포인터 위치
-                    let upClientX; // [drag] 마우스 땟을 때 포인터 위치
-
-                    // 마우스 클릭했을 때 이벤트
-                    carouselSlide.addEventListener("mousedown", (e) => {
-                        isDragChk = true;
-                        downClientX = e.clientX; // 처음 클릭할 때 클릭 지점 체크
-                    });
-
-                    // 마우스 클릭에서 땟을 때 이벤트
-                    carouselSlide.addEventListener("mouseup", (e) => {
-                        // 이미지 들어가면 실행이 안되가지고 css 에서 img에 user-drag: none; 넣어줘야함
-                        isDragChk = false;
-                        upClientX = e.clientX; // 클릭후 땟을 때 클릭 지점 체크
-
-                        // 첫클릭 > 클릭땟을때 ? 오른쪽 이동 : 왼쪽 이동;
-                        downClientX > upClientX ? carouselNextMove() : carouselPrevMove();
-                        carouselThumbSet(); // 현재 인덱스 값에 맞춰 썸네일 엑티브
-                    });
                 };
 
-                // 슬라이드 뒤로가기
-                const carouselPrevMove = () => {
-                    clearInterval(slideMoveTimer); // 롤링 초기화
-                    slideCurrentIdx == 0 ? (slideCurrentIdx = 4) : slideCurrentIdx--; // 슬라이드 맨 앞이면 마지막으로 이동
-                    carouselSlide.style.transform = `translate3d(-${slideCurrentIdx * slideWid}px, 0px, 0px)`;
+                let isDragChk = false; // [drag] 초기화
+                let downClientX; // [drag] 마우스 클릭했을 때 포인터 위치
+                let upClientX; // [drag] 마우스 땟을 때 포인터 위치
 
+                // 마우스 클릭했을 때 이벤트
+                carouselSlide.addEventListener("mousedown", (e) => {
+                    isDragChk = true;
+                    downClientX = e.clientX; // 처음 클릭할 때 클릭 지점 체크
+                    console.log(slideCurrentIdx);
+                });
+
+                // 마우스 클릭에서 땟을 때 이벤트
+                carouselSlide.addEventListener("mouseup", (e) => {
+                    // 이미지 들어가면 실행이 안되가지고 css 에서 img에 user-drag: none; 넣어줘야함
+                    isDragChk = false;
+                    upClientX = e.clientX; // 클릭후 땟을 때 클릭 지점 체크
+
+                    // 첫클릭 > 클릭땟을때 ? 오른쪽 이동 : 왼쪽 이동;
+                    downClientX > upClientX ? carouselNextMove() : carouselPrevMove();
                     carouselThumbSet(); // 현재 인덱스 값에 맞춰 썸네일 엑티브
-                    carouselSlideMove(); // 다시 롤링 시작
-                };
 
-                // 슬라이드 앞으로가기
-                const carouselNextMove = () => {
-                    clearInterval(slideMoveTimer); // 롤링 초기화
-                    slideCurrentIdx == 4 ? (slideCurrentIdx = 0) : slideCurrentIdx++; // 슬라이드 마지막이면 맨 앞으로 이동
-                    carouselSlide.style.transform = `translate3d(-${slideCurrentIdx * slideWid}px, 0px, 0px)`;
-
-                    carouselThumbSet(); // 현재 인덱스 값에 맞춰 썸네일 엑티브
-                    carouselSlideMove(); // 다시 롤링 시작
-                };
+                    console.log(slideCurrentIdx);
+                });
 
                 // 슬라이드 초기화
                 const slideReset = () => {
@@ -467,6 +470,7 @@
                 tabs.forEach((target) => {
                     target.addEventListener("click", async function (image) {
                         slideReset();
+                        console.log(slideCurrentIdx);
 
                         const temp = document.querySelector(".temp");
                         temp.remove();

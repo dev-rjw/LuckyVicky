@@ -9,7 +9,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 900);
     setTimeout(function () {
         document.getElementById("intro").classList.add("hide");
+        showMember();
     }, 3000);
+
+    // 멤버카드 순차등장
+    window.addEventListener("scroll", function () {
+        showMember();
+    });
 });
 
 // 인트로
@@ -22,4 +28,15 @@ function intro() {
     newLeaf.style.transform = "rotate(" + 90 * leafNum + "deg)";
     document.getElementById("loading").append(newLeaf);
     leafNum++;
+}
+
+// 멤버카드 순차등장
+function showMember() {
+    let scrollTop = document.documentElement.scrollTop;
+    document.querySelectorAll(".mem-box").forEach(function (e) {
+        console.log(e.offsetHeight);
+        if (scrollTop + window.innerHeight >= e.offsetTop + e.offsetHeight / 2) {
+            e.classList.add("now");
+        }
+    });
 }

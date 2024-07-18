@@ -1,4 +1,3 @@
-
 /* 인트로 */
 div#intro {
     z-index: 101;
@@ -123,8 +122,18 @@ div#intro.hide + #main {
     height: fit-content;
 }
 #main .title {
+    position: relative;
     height: 60px;
     text-align: center;
+}
+
+#main .title .view {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    font-weight: 700;
+    color: #193722;
 }
 #main .title h2 {
     margin: 0;
@@ -173,11 +182,20 @@ div#intro.hide + #main {
     max-width: 600px;
     min-width: 300px;
     margin-top: 60px;
+    overflow: hidden;
 }
 
 #main .mem-box {
     display: flex;
     gap: 24px;
+
+    opacity: 0;
+    transform: translateY(50%);
+    transition: 0.8s;
+}
+#main .mem-box.now {
+    opacity: 1;
+    transform: translateY(0);
 }
 #main .mem-img {
     flex-basis: 100%;
@@ -250,4 +268,3 @@ div#intro.hide + #main {
 #main .mem-box .link a:hover img {
     transform: scale(1.12);
 }
-

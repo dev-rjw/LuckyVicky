@@ -32,32 +32,68 @@
         <!-- 스타일 -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" />
         <link href="./resources/css/style.css" rel="stylesheet" />
+        <link href="./resources/css/carousel.css" rel="stylesheet" />
     </head>
     <body>
-        <div class="tabRow">
-            <div class="tabColumn">
-                <img src="https://www.w3schools.com/howto/img_nature.jpg" alt="Nature" style="width: 100%" id="0" />
-            </div>
-            <div class="tabColumn">
-                <img src="https://www.w3schools.com/howto/img_snow.jpg" alt="Snow" style="width: 100%" id="1" />
-            </div>
-            <div class="tabColumn">
-                <img src="https://www.w3schools.com/howto/img_mountains.jpg" alt="Mountains" style="width: 100%" id="2" />
-            </div>
-            <div class="tabColumn">
-                <img src="https://www.w3schools.com/howto/img_lights.jpg" alt="Lights" style="width: 100%" id="3" />
-            </div>
-            <div class="tabColumn">
-                <img src="data:image/png;base64,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" alt="Lights" style="width: 70%" id="4" />
-            </div>
-        </div>
+        <div id="wrap">
+            <div class="container">
+                <div class="contents">
+                    <!-- ub-section -->
+                    <section id="sub-section">
+                        <!-- tabRow -->
+                        <div class="tabRow">
+                            <div class="tabColumn">
+                                <img src="https://www.w3schools.com/howto/img_nature.jpg" alt="Nature" style="" id="0" />
+                            </div>
+                            <div class="tabColumn">
+                                <img src="https://www.w3schools.com/howto/img_snow.jpg" alt="Snow" style="" id="1" />
+                            </div>
+                            <div class="tabColumn">
+                                <img src="https://www.w3schools.com/howto/img_mountains.jpg" alt="Mountains" style="" id="2" />
+                            </div>
+                            <div class="tabColumn">
+                                <img src="https://www.w3schools.com/howto/img_lights.jpg" alt="Lights" style="" id="3" />
+                            </div>
+                            <div class="tabColumn">
+                                <img src="data:image/png;base64,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" alt="Lights" style="width: 70%" id="4" />
+                            </div>
+                        </div>
+                        <!--// tabRow -->
+                        <div class="view">
+                            <div class="left-area">
+                                <!-- carousel-wrap -->
+                                <div id="carousel-wrap">
+                                    <div class="inner">
+                                        <!-- carousel-slide -->
+                                        <div id="carousel-slide"></div>
+                                        <!--// carousel-slide -->
 
-        <div class="container">
-            <img id="expandedImg" width="100%" />
-        </div>
+                                        <!-- carousel-thumb -->
+                                        <div id="carousel-thumb"></div>
+                                        <!-- carousel-thumb -->
 
-        <div class="list">
-            <div class="temp" style="display: none;"></div>
+                                        <!-- btn-area -->
+                                        <div id="carousel-btn-area">
+                                            <button type="button" id="btn-prev">이전</button>
+                                            <button type="button" id="btn-next">다음</button>
+                                        </div>
+                                        <!--// btn-area -->
+                                    </div>
+                                </div>
+                                <!--// carousel-wrap -->
+                            </div>
+                            <div class="right-area">
+                                <div class="list">
+                                    <div class="temp" style="display: none"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!--// ub-section -->
+
+                    <!-- <img id="expandedImg" style="z-index: -9999; width: 0; height: 0; opacity: 0" width="100%" /> -->
+                </div>
+            </div>
         </div>
 
         <script type="module">
@@ -81,54 +117,199 @@
             const app = initializeApp(firebaseConfig);
             const db = getFirestore(app);
 
-            const img = document.querySelector(".tabRow");
-            window.onload = function () {
-                img.addEventListener("click", async function (image) {
-                    var expandImg = document.getElementById("expandedImg");
-                    expandImg.src = image.srcElement.src;
-                    expandImg.parentElement.style.display = "block";
+            window.onload = async function () {
+                let docs = await getDocs(collection(db, "description"));
+                const carouselWrap = document.getElementById("carousel-wrap"); // 전체 감싸고있는 슬라이드 영역
+                const carouselSlide = document.getElementById("carousel-slide"); // 큰 이미지 슬라이드 (자동)
+                const carouselSlideItems = document.querySelectorAll(".carousel-slide-item"); // 큰 이미지 슬라이드 아이템
+                const carouselThumb = document.getElementById("carousel-thumb");
+                const carouselBtnArea = document.getElementById("carousel-btn-area");
+                const carouselBtnPrev = document.getElementById("btn-prev");
+                const carouselBtnNext = document.getElementById("btn-next");
 
-                    const temp = document.querySelector('.temp');
-                    temp.remove();
-                
-                    let docs = await getDocs(collection(db, "description"));
-                    docs.forEach((doc) => {
-                        let row = doc.data();
+                let slideWid; // 슬라이드 넓이 값
+                let slideCurrentIdx = 0; // 슬라이드 현재 인덱스 값
+                let slideMoveDelay = 3000; // 슬라이드 돌아가는 속도
+                let slideMoveTimer; // interval 초기화
+                let isSlide = false;
 
-                        if (row['index'] == image.target.id) {   
-                            let name = row["name"];
-                            let description = row["description"];
-                            let mbti = row["mbti"];
-                            let advantages = row["advantages"];
-                            let style = row["style"];
-                            let blog = row["blog"];
-                            let github = row["github"];
+                // 슬라이드 자동 롤링
+                const carouselSlideMove = () => {
+                    slideMoveTimer = setInterval(() => {
+                        const carouselSlideLength = document.querySelectorAll(".carousel-slide-item").length;
+                        slideCurrentIdx = (slideCurrentIdx + 1) % carouselSlideLength; // 현재 인덱스값 구하기
 
-                            const temp = document.createElement("div");
-                            temp.className = "temp";
-                            temp.innerHTML = `
-                                <h1 id="name">${name}</h1>
-                                <h3 id="description">${description}</h3>
-                                <p id="mbti">- MBTI: ${mbti}</p>
-                                <p id="advantages">- 장점: ${advantages}</p>
-                                <p id="style">- 협업 스타일: ${style}</p>
-                                <p>
-                                    <span>
-                                        <a href="${blog}">
-                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCFUFKtdX8pENrrPyxgYnXmc_G3vjgnfI8gtu6SmWuaX34iEtBlHlL4qbZdQ&s" width="30px" /> </a
-                                    ></span>
-                                    <span>
-                                        <a href="${github}">
-                                            <img src="data:image/png;base64,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" width="25px" /> </a
-                                    ></span>
-                                </p>
-                            `;
-                            document.querySelector(".list").append(temp);
-                            
-                        }
+                        carouselSlide.style.transform = `translate3d(-${slideCurrentIdx * slideWid}px, 0px, 0px)`;
+
+                        carouselThumbSet();
+
+                        // document.querySelectorAll(".carousel-thumb-item").forEach((thumb, idx) => {
+                        //     thumb.classList.toggle("curr", idx === slideCurrentIdx);
+                        // });
+                    }, slideMoveDelay);
+                };
+
+                // 현재 인덱스 값에 맞춰 썸네일 엑티브
+                const carouselThumbSet = () => {
+                    const carouselThumbItems = document.querySelectorAll(".carousel-thumb-item");
+                    carouselThumbItems.forEach((thumb) => thumb.classList.remove("curr"));
+                    carouselThumbItems[slideCurrentIdx].classList.add("curr");
+                };
+
+                // 슬라이드 시작
+                const handleSlideStart = () => {
+                    // 슬라이드 리스트 초기 넓이 세팅
+                    slideWid = carouselSlide.offsetWidth;
+                    carouselSlideItems.forEach((item, idx) => (item.style.width = slideWid + "px"));
+
+                    carouselSlideMove();
+
+                    // 슬라이드 썸네일 클릭 기능
+                    document.querySelectorAll(".carousel-thumb-item").forEach((item, idx) => {
+                        // 썸네일 클릭 이벤트
+                        item.addEventListener("click", () => {
+                            clearInterval(slideMoveTimer); // 롤링 초기화
+                            slideCurrentIdx = idx; // 인덱스값을 클릭한 인덱스 값과 동일하게 변경해줌
+
+                            //클릭한 요소에 맞춰 슬라이드 이동 : carouselSlide의 transform3d의 값을 클릭한 요소의 -(인덱스*슬라이드) 넓이로 적용
+                            carouselSlide.style.transform = `translate3d(-${slideCurrentIdx * slideWid}px, 0px, 0px)`;
+
+                            carouselThumbSet(); // 현재 인덱스 값에 맞춰 썸네일 엑티브
+                            carouselSlideMove(); // 다시 롤링 시작
+                        });
+                    });
+
+                    carouselBtnPrev.addEventListener("click", carouselPrevMove); // 이전 버튼 클릭
+                    carouselBtnNext.addEventListener("click", carouselNextMove); // 다음 버튼 클릭
+
+                    let isDragChk = false; // [drag] 초기화
+                    let downClientX; // [drag] 마우스 클릭했을 때 포인터 위치
+                    let upClientX; // [drag] 마우스 땟을 때 포인터 위치
+
+                    // 마우스 클릭했을 때 이벤트
+                    carouselSlide.addEventListener("mousedown", (e) => {
+                        isDragChk = true;
+                        downClientX = e.clientX; // 처음 클릭할 때 클릭 지점 체크
+                    });
+
+                    // 마우스 클릭에서 땟을 때 이벤트
+                    carouselSlide.addEventListener("mouseup", (e) => {
+                        // 이미지 들어가면 실행이 안되가지고 css 에서 img에 user-drag: none; 넣어줘야함
+                        isDragChk = false;
+                        upClientX = e.clientX; // 클릭후 땟을 때 클릭 지점 체크
+
+                        // 첫클릭 > 클릭땟을때 ? 오른쪽 이동 : 왼쪽 이동;
+                        downClientX > upClientX ? carouselNextMove() : carouselPrevMove();
+                        carouselThumbSet(); // 현재 인덱스 값에 맞춰 썸네일 엑티브
+                    });
+                };
+
+                // 슬라이드 뒤로가기
+                const carouselPrevMove = () => {
+                    clearInterval(slideMoveTimer); // 롤링 초기화
+                    slideCurrentIdx == 0 ? (slideCurrentIdx = 4) : slideCurrentIdx--; // 슬라이드 맨 앞이면 마지막으로 이동
+                    carouselSlide.style.transform = `translate3d(-${slideCurrentIdx * slideWid}px, 0px, 0px)`;
+
+                    carouselThumbSet(); // 현재 인덱스 값에 맞춰 썸네일 엑티브
+                    carouselSlideMove(); // 다시 롤링 시작
+                };
+
+                // 슬라이드 앞으로가기
+                const carouselNextMove = () => {
+                    clearInterval(slideMoveTimer); // 롤링 초기화
+                    slideCurrentIdx == 4 ? (slideCurrentIdx = 0) : slideCurrentIdx++; // 슬라이드 마지막이면 맨 앞으로 이동
+                    carouselSlide.style.transform = `translate3d(-${slideCurrentIdx * slideWid}px, 0px, 0px)`;
+
+                    carouselThumbSet(); // 현재 인덱스 값에 맞춰 썸네일 엑티브
+                    carouselSlideMove(); // 다시 롤링 시작
+                };
+
+                // 슬라이드 초기화
+                const slideReset = () => {
+                    slideCurrentIdx = 0;
+                    clearInterval(slideMoveTimer);
+                    carouselSlide.innerHTML = "";
+                    carouselThumb.innerHTML = "";
+                    carouselSlide.style.transform = `translate3d(0px, 0px, 0px)`;
+                    isSlide = false;
+                };
+
+                // 슬라이드 생성
+                const createSlides = (imgs) => {
+                    let slideBigItems = "";
+                    let slideThumbItems = "";
+
+                    for (let i = 0; i < imgs.length; i++) {
+                        slideBigItems += `
+                            <div class="carousel-slide-item">
+                                <img src="${imgs[i]}" />
+                            </div>
+                        `;
+                        slideThumbItems += `
+                            <div class="carousel-thumb-item ${i === 0 ? "curr" : ""}">
+                                <img src="${imgs[i]}" />
+                            </div>
+                        `;
+                    }
+                    carouselSlide.innerHTML = slideBigItems;
+                    carouselThumb.innerHTML = slideThumbItems;
+                };
+
+                const img = document.querySelector(".tabRow");
+                const tabs = document.querySelectorAll(".tabColumn");
+                tabs.forEach((target) => {
+                    target.addEventListener("click", async function (image) {
+                        slideReset();
+
+                        // var expandImg = document.getElementById("expandedImg");
+                        // expandImg.src = image.srcElement.src;
+                        // expandImg.parentElement.style.display = "block";
+
+                        const temp = document.querySelector(".temp");
+                        temp.remove();
+
+                        docs.forEach((doc) => {
+                            let row = doc.data();
+
+                            if (row["index"] == image.target.id) {
+                                let name = row["name"];
+                                let description = row["description"];
+                                let mbti = row["mbti"];
+                                let advantages = row["advantages"];
+                                let style = row["style"];
+                                let blog = row["blog"];
+                                let github = row["github"];
+                                let imgs = row["image"];
+
+                                const temp = document.createElement("div");
+                                temp.className = "temp";
+                                temp.innerHTML = `
+                                    <h1 id="name">${name}</h1>
+                                    <h3 id="description">${description}</h3>
+                                    <p id="mbti">- MBTI: ${mbti}</p>
+                                    <p id="advantages">- 장점: ${advantages}</p>
+                                    <p id="style">- 협업 스타일: ${style}</p>
+                                    <p>
+                                        <span>
+                                            <a href="${blog}">
+                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCFUFKtdX8pENrrPyxgYnXmc_G3vjgnfI8gtu6SmWuaX34iEtBlHlL4qbZdQ&s" width="30px" /> </a
+                                        ></span>
+                                        <span>
+                                            <a href="${github}">
+                                                <img src="data:image/png;base64,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" width="25px" /> </a
+                                        ></span>
+                                    </p>
+                                `;
+                                document.querySelector(".list").append(temp);
+                                createSlides(imgs);
+                            }
+                        });
+                        isSlide = true;
+                        if (isSlide) handleSlideStart();
                     });
                 });
             };
         </script>
+        <!-- <script src="./resources/js/carousel.js"></script> -->
     </body>
 </html>

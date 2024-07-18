@@ -7,7 +7,7 @@ body {
     margin: 0;
     background-color: lightyellow;
 }
-
+/* 
 .tabRow {
     height: 190px;
 }
@@ -40,4 +40,11 @@ body {
     padding: 10px;
     margin: 5px 5% 0 51%;
     border: 2px solid green;
-}
+} */
+#sub-section {width:100%; max-width:1280px; margin:0 auto;}
+.tabRow {display: flex; align-items: center; gap: 10px;}
+.tabRow .tabColumn {width:25%; cursor: pointer;}
+.tabRow .tabColumn img {width:100%;}
+#sub-section .view {display:flex; gap:30px;}
+#sub-section .view .left-area {width:100%; max-width:600px;}
+#sub-section .view .right-area {width:calc(100% - 630px)}

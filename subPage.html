@@ -228,7 +228,6 @@
                 carouselSlide.addEventListener("mousedown", (e) => {
                     isDragChk = true;
                     downClientX = e.clientX; // 처음 클릭할 때 클릭 지점 체크
-                    console.log(slideCurrentIdx);
                 });
 
                 // 마우스 클릭에서 땟을 때 이벤트
@@ -240,8 +239,6 @@
                     // 첫클릭 > 클릭땟을때 ? 오른쪽 이동 : 왼쪽 이동;
                     downClientX > upClientX ? carouselNextMove() : carouselPrevMove();
                     carouselThumbSet(); // 현재 인덱스 값에 맞춰 썸네일 엑티브
-
-                    console.log(slideCurrentIdx);
                 });
 
                 // 슬라이드 초기화
@@ -470,7 +467,6 @@
                 tabs.forEach((target) => {
                     target.addEventListener("click", async function (image) {
                         slideReset();
-                        console.log(slideCurrentIdx);
 
                         const temp = document.querySelector(".temp");
                         temp.remove();

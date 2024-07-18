@@ -48,7 +48,7 @@
             <div class="container" style="position: relative; z-index: 1" ;>
                 <div class="contents">
                     <div class="header">
-                        <h1 class="logo"><a href="/index.html" title="홈으로 이동"></a></h1>
+                        <h1 class="logo"><a href="./index.html" title="홈으로 이동"></a></h1>
                     </div>
                     <!-- ub-section -->
                     <section id="sub-section">
@@ -56,23 +56,23 @@
                         <div class="tab-row">
                             <div class="tab-column">
                                 <img src="/resources/images/jh/0.jpg" alt="박준호" id="0" />
-                                <span class="tab-hover-txt">박준호🍀</span>
+                                <span class="tab-hover-txt" id="0">박준호🍀</span>
                             </div>
                             <div class="tab-column">
                                 <img src="/resources/images/joayoung/joayoung-img.jpg" alt="조아영" id="1" />
-                                <span class="tab-hover-txt">조아영🍀</span>
+                                <span class="tab-hover-txt" id="1">조아영🍀</span>
                             </div>
                             <div class="tab-column">
                                 <img src="/resources/images/kimminkyu/kimminkyu-img01.jpg" alt="김민규" id="2" />
-                                <span class="tab-hover-txt">김민규🍀</span>
+                                <span class="tab-hover-txt" id="2">김민규🍀</span>
                             </div>
                             <div class="tab-column">
                                 <img src="/resources/images/jiwon/1.jpg" alt="류지원" id="3" />
-                                <span class="tab-hover-txt">류지원🍀</span>
+                                <span class="tab-hover-txt" id="3">류지원🍀</span>
                             </div>
                             <div class="tab-column">
-                                <img src="/resources/images/hyun/profile1.jpg" alt="이창현🍀" id="4" />
-                                <span class="tab-hover-txt">이창현🍀</span>
+                                <img src="/resources/images/hyun/profile1.jpg" alt="이창현" id="4" />
+                                <span class="tab-hover-txt" id="4">이창현🍀</span>
                             </div>
                         </div>
                         <!--// tabRow -->
@@ -473,6 +473,7 @@
                 var parameters = herfName.slice(herfName.indexOf("?") + 1, herfName.length);
                 var valName = parameters.split("=")[1]; // index의 값
 
+                if (valName == undefined) valName = 0;
                 let docs = await getDocs(collection(db, "description")); // firebase에서 description 값 가져오기
 
                 const temp = document.querySelector(".temp");

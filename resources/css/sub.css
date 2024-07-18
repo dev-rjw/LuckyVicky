@@ -88,12 +88,10 @@
     opacity: 0;
     transition: opacity ease 0.3s;
 }
-.tab-column:hover img,
 .tab-column:not(.tab-active) img {
     opacity: 0.5;
     filter: blur(1px);
 }
-.tab-column:hover .tab-hover-txt,
 .tab-column:not(.tab-active) .tab-hover-txt {
     opacity: 1;
 }

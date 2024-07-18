@@ -122,15 +122,18 @@ div#intro.hide + #main {
     height: fit-content;
 }
 #main .title {
+    position: relative;
     height: 60px;
     text-align: center;
-    margin-bottom: 20px;
 }
 
 #main .title .view {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translate(-50%, -100%);
     font-weight: 700;
     color: #193722;
-    margin-bottom: 8px;
 }
 #main .title h2 {
     margin: 0;
@@ -179,11 +182,20 @@ div#intro.hide + #main {
     max-width: 600px;
     min-width: 300px;
     margin-top: 60px;
+    overflow: hidden;
 }
 
 #main .mem-box {
     display: flex;
     gap: 24px;
+
+    opacity: 0;
+    transform: translateY(50%);
+    transition: 0.8s;
+}
+#main .mem-box.now {
+    opacity: 1;
+    transform: translateY(0);
 }
 #main .mem-img {
     flex-basis: 100%;

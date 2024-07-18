@@ -41,6 +41,7 @@
   overflow: hidden;
 }
 #carousel-thumb {
+  height: 79px;
   display: flex;
   gap: 10px;
 }

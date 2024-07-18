@@ -15,32 +15,31 @@
         <meta property="og:type" content="website" />
         <meta property="og:title" content="럭7ㅣ비7ㅣ" />
         <meta property="og:description" content="럭7ㅣ비7ㅣ" />
-        <meta property="og:image" content="./resources/images/og.jpg" />
+        <meta property="og:image" content="/resources/images/og.jpg" />
 
         <!-- favicon -->
-        <link rel="shortcut icon" href="./resources/images/favicon/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="./resources/images/favicon/apple-icon-180x180.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="./resources/images/favicon/android-icon-192x192.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="./resources/images/favicon/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="96x96" href="./resources/images/favicon/favicon-96x96.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="./resources/images/favicon/favicon-16x16.png" />
-        <link rel="manifest" href="./resources/images/favicon/manifest.json" />
-        <meta name="msapplication-TileImage" content="./resources/images/favicon/ms-icon-144x144.png" />
+        <link rel="shortcut icon" href="/resources/images/favicon/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/resources/images/favicon/apple-icon-180x180.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/resources/images/favicon/android-icon-192x192.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/resources/images/favicon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="96x96" href="/resources/images/favicon/favicon-96x96.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon/favicon-16x16.png" />
+        <link rel="manifest" href="/resources/images/favicon/manifest.json" />
+        <meta name="msapplication-TileImage" content="/resources/images/favicon/ms-icon-144x144.png" />
         <meta name="msapplication-TileColor" content="#59C095" />
         <meta name="theme-color" content="#59C095" />
 
         <!-- 스타일 -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-        <link href="./resources/css/reset-fonts.css" rel="stylesheet" />
-        <link href="./resources/css/style.css" rel="stylesheet" />
-        <link href="./resources/css/carousel.css" rel="stylesheet" />
-        <link rel="stylesheet" href="./comment-box.css" />
+        <link href="/resources/css/reset-fonts.css" rel="stylesheet" />
+        <link href="/resources/css/common.css" rel="stylesheet" />
+        <link href="/resources/css/sub.css" rel="stylesheet" />
     </head>
     <body>
-        <script src="./resources/js/script.js"></script>
+        <script src="/resources/js/script.js"></script>
         <!-- 마우스 포인터 -->
-        <div class="mouse-cursor"><img src="./resources/images/clover.png" alt="마우스커서" /></div>
+        <div class="mouse-cursor"><img src="/resources/images/icon/clover.png" alt="마우스커서" /></div>
 
         <div id="wrap">
             <!-- 배경 -->
@@ -56,23 +55,23 @@
                         <!-- tabRow -->
                         <div class="tab-row">
                             <div class="tab-column">
-                                <img src="./resources/images/jh/0.jpg" alt="박준호" id="0" />
+                                <img src="/resources/images/jh/0.jpg" alt="박준호" id="0" />
                                 <span class="tab-hover-txt">박준호🍀</span>
                             </div>
                             <div class="tab-column">
-                                <img src="./resources/images/joayoung/joayoung-img.jpg" alt="조아영" id="1" />
+                                <img src="/resources/images/joayoung/joayoung-img.jpg" alt="조아영" id="1" />
                                 <span class="tab-hover-txt">조아영🍀</span>
                             </div>
                             <div class="tab-column">
-                                <img src="./resources/images/kimminkyu/kimminkyu-img01.jpeg" alt="김민규" id="2" />
+                                <img src="/resources/images/kimminkyu/kimminkyu-img01.jpg" alt="김민규" id="2" />
                                 <span class="tab-hover-txt">김민규🍀</span>
                             </div>
                             <div class="tab-column">
-                                <img src="./resources/images/jiwon/1.png" alt="류지원" id="3" />
+                                <img src="/resources/images/jiwon/1.jpg" alt="류지원" id="3" />
                                 <span class="tab-hover-txt">류지원🍀</span>
                             </div>
                             <div class="tab-column">
-                                <img src="./resources/images/hyun/profile1.jpg" alt="이창현🍀" id="4" />
+                                <img src="/resources/images/hyun/profile1.jpg" alt="이창현🍀" id="4" />
                                 <span class="tab-hover-txt">이창현🍀</span>
                             </div>
                         </div>
@@ -104,7 +103,7 @@
                                 <div class="weather-card-wrap">
                                     <div class="weather-card">
                                         <div class="weather-card-tit"><span class="weather-card-city-name">오늘</span>의 날씨</div>
-                                        <div class="weather-card-text">☀️☁️❄️☔</div>
+                                        <div class="weather-card-text">⛅☁️❄️☔</div>
                                         <img class="weather-card-icon" />
                                     </div>
                                 </div>
@@ -293,6 +292,14 @@
                     let style = row["style"];
                     let tmi = row["tmi"];
                     let blog = row["blog"];
+                    let blogIcon;
+                    if (blog.indexOf("github") != -1) {
+                        blogIcon = "github-io";
+                    } else if (blog.indexOf("velog") != -1) {
+                        blogIcon = "velog";
+                    } else {
+                        blogIcon = "tstory";
+                    }
                     let github = row["github"];
                     let imgs = row["image"];
                     let index = row["index"];
@@ -325,12 +332,8 @@
 
                         <div class="info-btn-wrap">
                             <div class="info-btn-left">
-                                 <a href="${blog}" target="_blank">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCFUFKtdX8pENrrPyxgYnXmc_G3vjgnfI8gtu6SmWuaX34iEtBlHlL4qbZdQ&s" width="30px" /> </a
-                            >
-                                <a href="${github}" target="_blank">
-                                    <img src="data:image/png;base64,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" width="25px" /> </a
-                            >
+                                 <a href="${blog}" class="info-btn" target="_blank"><img src="/resources/images/icon/${blogIcon}.svg" alt="블로그 로고"></a>
+                                <a href="${github}" class="info-btn" target="_blank"><img src="/resources/images/icon/github.svg" alt="깃허브 로고"></a>
                             </div>
 
                             <div class="info-btn-right">
@@ -340,9 +343,6 @@
 
                         <aside class="comments-aside">
                             <div class="comments-group">
-                                <div class="comments-title">
-                                    <h1>Comment Box</h1>
-                                </div>
                                 <div class="comments-contents">
                                     <ul class="comments-list"></ul>
                                 </div>
@@ -527,6 +527,6 @@
                 });
             };
         </script>
-        <!-- <script src="./resources/js/carousel.js"></script> -->
+        <!-- <script src="/resources/js/carousel.js"></script> -->
     </body>
 </html>

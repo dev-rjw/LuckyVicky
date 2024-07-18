@@ -63,6 +63,19 @@ textarea,
 select {
     font: inherit;
 }
+button,
+input {
+    background-color: transparent;
+    border: 0;
+}
+button {
+    cursor: pointer;
+}
+button:focus,
+input:focus {
+    outline: none;
+    box-shadow: none;
+}
 textarea:not([rows]) {
     min-height: 10em;
 }

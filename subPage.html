@@ -55,7 +55,7 @@
                         <!-- tabRow -->
                         <div class="tab-row">
                             <div class="tab-column" id="0">
-                                <img src="./resources/images/jh/0.jpg" alt="박준호"  />
+                                <img src="./resources/images/jh/0.jpg" alt="박준호" />
                                 <span class="tab-hover-txt">박준호🍀</span>
                             </div>
                             <div class="tab-column" id="1">
@@ -405,9 +405,12 @@
                         if (text !== "") {
                             const li = document.createElement("li");
                             const removeBtn = document.createElement("button");
+                            removeBtn.className = "comments-list-btn comments-list-btn-del";
                             const modifyBtn = document.createElement("button");
+                            modifyBtn.className = "comments-list-btn comments-list-btn-edit";
                             const span = document.createElement("span");
                             span.innerText = text;
+                            span.className = "comments-list-txt";
                             modifyBtn.innerText = "Edit";
                             removeBtn.innerText = "Del";
                             modifyBtn.addEventListener("click", modifyItem);
@@ -566,7 +569,7 @@
                                 let index,
                                     likes,
                                     city = createDescrption(row);
-                                createComment(image.target.id);
+                                createComment(target.id);
                                 createLikeBtn(index, likes, docId);
                                 getWeather(city);
                             }

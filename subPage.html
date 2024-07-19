@@ -372,7 +372,6 @@
                     // 댓글 삭제
                     const delItem = (event) => {
                         const target = event.target.parentElement;
-                        console.log(target);
 
                         // 준호 수정
                         var now;
@@ -382,8 +381,6 @@
                                 now = doc.id;
                             }
                         });
-
-                        console.log("now = " + now); // 문서 id
 
                         let commedDoc = doc(db, "description", now);
 
@@ -427,19 +424,12 @@
 
                         // 준호 수정
                         var nowDoc;
-                        console.log("docs =" + docs);
                         docs.forEach((doc) => {
                             let row = doc.data();
-                            // console.log(doc.data());
                             if (row["index"] == onTab) {
-                                console.log(row["index"]); // 4
-                                // console.log(onTab);
                                 nowDoc = doc.id;
-                                // console.log(doc.id);
                             }
                         });
-
-                        // console.log("nowDoc =" + nowDoc); // 문서 id
 
                         let commendDoc = doc(db, "description", nowDoc);
 
@@ -459,8 +449,6 @@
                             nowDocId = doc.id;
                         }
                     });
-
-                    // console.log(nowDocId); // 문서 id
 
                     onSnapshot(doc(db, "description", nowDocId), (doc) => {
                         let row = doc.data();

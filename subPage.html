@@ -54,25 +54,25 @@
                     <section id="sub-section">
                         <!-- tabRow -->
                         <div class="tab-row">
-                            <div class="tab-column">
-                                <img src="./resources/images/jh/0.jpg" alt="박준호" id="0" />
-                                <span class="tab-hover-txt" id="0">박준호🍀</span>
+                            <div class="tab-column" id="0">
+                                <img src="./resources/images/jh/0.jpg" alt="박준호"  />
+                                <span class="tab-hover-txt">박준호🍀</span>
                             </div>
-                            <div class="tab-column">
-                                <img src="./resources/images/joayoung/joayoung-img.jpg" alt="조아영" id="1" />
-                                <span class="tab-hover-txt" id="1">조아영🍀</span>
+                            <div class="tab-column" id="1">
+                                <img src="./resources/images/joayoung/joayoung-img.jpg" alt="조아영" />
+                                <span class="tab-hover-txt">조아영🍀</span>
                             </div>
-                            <div class="tab-column">
-                                <img src="./resources/images/kimminkyu/kimminkyu-img01.jpg" alt="김민규" id="2" />
-                                <span class="tab-hover-txt" id="2">김민규🍀</span>
+                            <div class="tab-column" id="2">
+                                <img src="./resources/images/kimminkyu/kimminkyu-img01.jpg" alt="김민규" />
+                                <span class="tab-hover-txt">김민규🍀</span>
                             </div>
-                            <div class="tab-column">
-                                <img src="./resources/images/jiwon/1.jpg" alt="류지원" id="3" />
-                                <span class="tab-hover-txt" id="3">류지원🍀</span>
+                            <div class="tab-column" id="3">
+                                <img src="./resources/images/jiwon/1.jpg" alt="류지원" />
+                                <span class="tab-hover-txt">류지원🍀</span>
                             </div>
-                            <div class="tab-column">
-                                <img src="./resources/images/hyun/profile1.jpg" alt="이창현" id="4" />
-                                <span class="tab-hover-txt" id="4">이창현🍀</span>
+                            <div class="tab-column" id="4">
+                                <img src="./resources/images/hyun/profile1.jpg" alt="이창현" />
+                                <span class="tab-hover-txt">이창현🍀</span>
                             </div>
                         </div>
                         <!--// tabRow -->
@@ -574,7 +574,7 @@
                             let row = doc.data();
                             let docId = doc.id;
 
-                            if (row["index"] == image.target.id) {
+                            if (row["index"] == target.id) {
                                 let index,
                                     likes,
                                     city = createDescrption(row);

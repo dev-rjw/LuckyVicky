@@ -34,7 +34,6 @@ function intro() {
 function showMember() {
     let scrollTop = document.documentElement.scrollTop;
     document.querySelectorAll(".mem-box").forEach(function (e) {
-        console.log(e.offsetHeight);
         if (scrollTop + window.innerHeight >= e.offsetTop + e.offsetHeight / 2) {
             e.classList.add("now");
         }

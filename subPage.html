@@ -113,6 +113,7 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="comment-wrap"></div>
                     </section>
                     <!--// ub-section -->
 
@@ -307,7 +308,10 @@
                     let city = row["city"];
 
                     const temp = document.createElement("div");
+                    const comentWrap = document.getElementById("comment-wrap");
+                    const comentCont = document.createElement("div");
                     temp.className = "temp";
+                    comentCont.className = "coment-cont";
                     temp.innerHTML = `
                         <div class="name-description-wrap">
                             <h1 id="name">${name}<p id="mbti">${mbti}</p></h1>
@@ -339,8 +343,9 @@
                             <div class="info-btn-right">
                                 <div id="like-btn-area"></div>
                             </div>
-                        </div>
-
+                        </div>                        
+                    `;
+                    comentCont.innerHTML = `
                         <aside class="comments-aside">
                             <div class="comments-group">
                                 <div class="comments-contents">
@@ -356,6 +361,7 @@
                         </aside>
                     `;
                     document.querySelector(".list").append(temp);
+                    comentWrap.append(comentCont);
                     createSlides(imgs);
 
                     return index, likes, city;
@@ -560,6 +566,7 @@
 
                         const temp = document.querySelector(".temp");
                         temp.remove();
+                        document.querySelector(".coment-cont").remove();
 
                         docs.forEach((doc) => {
                             let row = doc.data();

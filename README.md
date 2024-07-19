@@ -22,7 +22,7 @@
 
 ## 개발환경(기술)
 <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/html-icon.png" width="10%">
-<img src="https://cdn.worldvectorlogo.com/logos/javascript-1.svg" width="10%"> - only javascript
+<img src="https://cdn.worldvectorlogo.com/logos/javascript-1.svg" width="10%">
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg" width="12%">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiotX3iOA2NNNQFLlN2C-cunD_LtBuVXtBww&s" width="40%">
 <img src="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_vscode_icon_130084.png" width="10%">

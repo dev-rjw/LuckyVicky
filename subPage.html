@@ -478,6 +478,29 @@
                     // comment end -----------------------------------------
                 };
 
+                function createLikeBtn(index, likes, docId) {
+                    const likeBtnArea = document.getElementById("like-btn-area");
+                    likeBtnArea.innerHTML = `
+                        <button class="like-btn like-btn-${index}">
+                            <div class="like-icon">
+                                <span class="material-symbols-rounded"> thumb_up </span>
+                            </div>
+                            <span class="like-text">${likes}</span>
+                        </button>
+                    `;
+                    const likeBtnIndex = document.querySelector(`.like-btn-${index}`);
+                    likeBtnIndex.addEventListener("click", function () {
+                        incrementLike(docId);
+                    });
+                    // 실시간 업데이트 리스너 설정
+                    let likesRef = doc(db, "description", docId);
+                    onSnapshot(likesRef, (doc) => {
+                        let updatedLikes = doc.data().likes;
+                        let likeText = document.querySelector(`.like-btn-${index} .like-text`);
+                        likeText.innerText = updatedLikes;
+                    });
+                }
+
                 // 좋아요 증가
                 async function incrementLike(docId) {
                     let likesRef = doc(db, "description", docId);

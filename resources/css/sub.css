@@ -359,6 +359,9 @@
     background-color: #fff;
     box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.15);
 }
+.comments-aside ::-webkit-scrollbar-track {
+    background: #fff; /*스크롤바 뒷 배경 색상*/
+}
 .comments-title {
     font-size: 16px;
     font-weight: 500;

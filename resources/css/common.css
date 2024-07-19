@@ -4,14 +4,14 @@ body {
     background-color: #f4ffe6;
 }
 ::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
+    width: 16px;
+    height: 16px;
 }
 ::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.5); /* 스크롤바 색상 */
     border-radius: 12px; /* 스크롤바 둥근 테두리 */
     background-clip: padding-box;
-    border: 3px solid transparent;
+    border: 5px solid transparent;
 }
 ::-webkit-scrollbar-track {
     background: #f4ffe6; /*스크롤바 뒷 배경 색상*/

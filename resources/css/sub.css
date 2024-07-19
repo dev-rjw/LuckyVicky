@@ -1,0 +1,442 @@
+/* header, footer */
+.header,
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header {
+    padding: 30px 0;
+}
+.logo {
+    display: flex;
+    width: 80px;
+    height: 70px;
+    background-color: rgba(244, 255, 230, 0.8);
+    border-radius: 50%;
+}
+.logo a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-image: url(../images/logo.png);
+    background-position: 50% 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.footer {
+    padding: 60px 0 30px;
+}
+.copyright {
+    font-size: 16px;
+}
+
+/* container */
+#sub-section {
+    width: 100%;
+    max-width: calc(1280px + 24px);
+    margin: 0 auto;
+    padding: 0 12px;
+    background-color: rgba(244, 255, 230, 0.8);
+}
+/* tab */
+.tab-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-bottom: 40px;
+}
+.tab-column {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border-radius: 8px;
+}
+.tab-column img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 100%;
+    opacity: 1;
+    transition: opacity ease 0.4s;
+}
+.tab-column::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 1;
+}
+.tab-hover-txt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    opacity: 0;
+    transition: opacity ease 0.3s;
+}
+.tab-column:not(.tab-active) img {
+    opacity: 0.5;
+    filter: blur(1px);
+}
+.tab-column:not(.tab-active) .tab-hover-txt {
+    opacity: 1;
+}
+#sub-section .view {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 30px;
+}
+#sub-section .view .left-area,
+#sub-section .view .right-area {
+    width: 100%;
+}
+#sub-section .view .left-area {
+    display: flex;
+    justify-content: center;
+}
+@media (min-width: 992px) {
+    #sub-section .view {
+        flex-direction: row;
+    }
+    #sub-section .view .left-area,
+    #sub-section .view .right-area {
+        max-width: 600px;
+    }
+}
+
+/* carousel */
+#carousel-wrap {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 600px; /* 서브페이지 영역에 따라 변경되거나 삭제될 값*/
+    box-sizing: border-box;
+}
+#carousel-wrap .inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+#carousel-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+}
+#carousel-slide {
+    position: relative;
+    display: flex;
+    width: 100%;
+    transform: translate3d(0px, 0px, 0px);
+    transition-duration: 500ms;
+}
+.carousel-slide-item {
+    width: 100%;
+    max-height: 400px;
+    flex: 1 0 auto;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+    pointer-events: auto;
+    transition: transform 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+}
+#carousel-thumb {
+    height: 79px;
+    display: flex;
+    gap: 10px;
+}
+.carousel-thumb-item {
+    position: relative;
+    flex: 1;
+    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.carousel-thumb-item:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.35);
+    transition: all 0.5s ease 0.15s;
+}
+.carousel-thumb-item.curr::before {
+    left: auto;
+    right: 0;
+    width: 0;
+    transition: all 0.5s ease;
+}
+#btn-prev,
+#btn-next {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, calc(-50% - (79px / 2)));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: all ease 0.4s;
+    cursor: pointer;
+}
+#btn-prev {
+    left: 12px;
+}
+#btn-prev:hover {
+    left: 6px;
+}
+#btn-next {
+    right: 12px;
+}
+#btn-next:hover {
+    right: 6px;
+}
+
+/* 날씨 */
+.weather-card-wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 4px;
+}
+.weather-card {
+    display: inline-flex;
+    align-items: center;
+    min-width: 200px;
+    min-height: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #7aa5eb;
+    padding: 0 8px 0 16px;
+    border-radius: 8px;
+}
+.weather-card-tit {
+    font-weight: 700;
+    color: #fff;
+    margin-right: 12px;
+}
+.weather-card-icon {
+    max-width: 50px;
+}
+
+/* 정보 */
+.name-description-wrap {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+#name {
+    font-size: 50px;
+    font-weight: 800;
+    margin-bottom: 30px;
+}
+#mbti {
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 600;
+    color: #59c095;
+    margin-left: 10px;
+}
+#description {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+.info-list-wrap {
+    margin-bottom: 40px;
+}
+.info-list > li {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 24px;
+}
+.info-list > li:first-child {
+    padding-top: 0;
+}
+.info-list-tit {
+    width: 100px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #59c095;
+}
+.info-list-txt {
+    width: calc(100% - 100px);
+    padding-left: 16px;
+}
+.info-btn-wrap {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 60px;
+}
+.info-btn-left {
+    display: flex;
+    gap: 10px;
+}
+.info-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: #fff;
+    border-radius: 100%;
+    transition: all ease 0.4s;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.15);
+}
+.info-btn img {
+    width: 30px;
+    height: 30px;
+    transition: all ease 0.2s;
+}
+.info-btn:hover {
+    background-color: #ddd;
+}
+.info-btn:hover img {
+    transform: scale(1.12);
+}
+
+/* 좋아요 */
+#like-btn-area {
+    display: inline-flex;
+}
+.like-btn {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #59c095;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: all ease 0.2s;
+}
+.like-btn:hover {
+    background-color: #4ca580;
+}
+.like-icon {
+    position: relative;
+    line-height: 1;
+    margin-top: 4px;
+    transition: all ease 0.2s;
+}
+.like-btn:hover .like-icon {
+    /* color: #333; */
+    margin-top: 0;
+    padding-bottom: 4px;
+}
+.like-text {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* 댓글 */
+.comments-aside {
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.15);
+}
+.comments-title {
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    color: #fff;
+    padding: 8px;
+    margin-bottom: 24px;
+    border-radius: 8px;
+    background-color: #7aa5eb;
+}
+.comments-contents {
+    max-height: 300px;
+    overflow-y: auto;
+}
+.form-group {
+    border: 2px solid #7aa5eb;
+    border-radius: 8px;
+}
+.comments-list > li {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 16px;
+    padding-bottom: 16px;
+    justify-content: flex-end;
+}
+.comments-list-txt {
+    display: block;
+    width: calc(100% - ((32px * 2) + 4px));
+    padding-right: 10px;
+}
+.comments-list-btn {
+    width: 32px;
+    height: 26px;
+    font-size: 12px;
+    color: #fff;
+    border-radius: 4px;
+}
+.comments-list-btn-edit {
+    background-color: #59c095;
+}
+.comments-list-btn-del {
+    margin-left: 4px;
+    background-color: #666;
+}
+.comments-form {
+    display: flex;
+    flex-wrap: wrap;
+    height: 40px;
+}
+.comments-form input {
+    width: calc(100% + 2px - 60px);
+    height: calc(100% + 4px);
+    padding: 6px 12px 6px 15px;
+    margin: -2px 0 -2px -2px;
+}
+.comments-form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(60px + 2px);
+    height: calc(100% + 4px);
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    background-color: #7aa5eb;
+    margin: -2px -2px -2px 0;
+    border-radius: 0 8px 8px 0;
+    transition: all ease 0.4s;
+}
+.comments-form button:hover {
+    background-color: #6183bb;
+}

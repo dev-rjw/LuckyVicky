@@ -10,7 +10,7 @@ div#intro {
     justify-content: center;
     width: 100vw;
     height: 100vh;
-    background-color: #fcf9ed;
+    background-color: #f4ffe6;
     transition: 1s;
 }
 div#intro.hide {
@@ -25,7 +25,7 @@ div#intro .intro-txt {
     line-height: 120px;
     font-size: 32px;
     font-weight: 700;
-    color: #00731b;
+    color: #7aa5eb;
     transition: 1s 0.5s;
 }
 
@@ -58,7 +58,7 @@ div#intro .leaf div {
     top: -50px;
     width: 100px;
     height: 100px;
-    background: #00731b;
+    background: #59c095;
 }
 div#intro .leaf:before,
 div#intro .leaf:after {
@@ -67,7 +67,7 @@ div#intro .leaf:after {
     position: relative;
     width: 100px;
     height: 100px;
-    background: #00731b;
+    background: #59c095;
     border-radius: 50%;
 }
 div#intro .leaf:before {
@@ -94,7 +94,7 @@ div#intro.hide + #main {
 #main {
     display: none;
     position: relative;
-    background-color: #fcf9ed;
+    background-color: #f4ffe6;
     width: 100%;
     min-width: 670px;
     min-height: 100vh;
@@ -110,7 +110,7 @@ div#intro.hide + #main {
     margin: 0 auto;
     display: flex;
     justify-content: center;
-    gap: 4%;
+    gap: 6%;
 }
 
 /* 좌측 : 팀 소개영역 */
@@ -129,22 +129,29 @@ div#intro.hide + #main {
 
 #main .title .view {
     position: absolute;
-    top: -8px;
+    top: -3px;
     left: 50%;
     transform: translate(-50%, -100%);
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+}
+#main .title .total {
+    font-size: 16px;
     font-weight: 700;
-    color: #193722;
+    color: #59c095;
+    padding-left: 4px;
 }
 #main .title h2 {
     margin: 0;
     font-size: calc(1.325rem + 0.4vw);
     font-weight: 700;
-    color: #193722;
+    color: #333;
 }
 #main .team-info {
-    border: 2px solid #193722;
-    background-color: #fcf9ed;
-    border-radius: 24px;
+    background-color: #fff;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
     overflow: hidden;
 }
 #main .team-info > img {
@@ -153,31 +160,31 @@ div#intro.hide + #main {
 #main .team-info .box {
     display: flex;
     flex-direction: column;
-    padding: 16px 24px 24px;
+    padding: 24px 26px;
     font-size: 14px;
 }
 #main .team-info .box .sub-title {
-    color: #193722;
+    color: #7aa5eb;
     font-size: 16px;
     font-weight: 700;
 }
 #main .team-info .box div + .sub-title {
-    margin-top: 12px;
+    margin-top: 16px;
 }
 #main .team-info .sub-title + div {
-    background-color: #193722;
+    background-color: #333;
     border-radius: 4px;
-    padding: 8px;
-    margin-top: 8px;
+    padding: 8px 12px;
+    margin-top: 6px;
     line-height: 1.5;
-    color: #fcf9ed;
+    color: #f4ffe6;
 }
 
 /* 우측 : 멤버 리스트 */
 #main #mem-area {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 60px;
     width: 40%;
     max-width: 600px;
     min-width: 300px;
@@ -188,7 +195,6 @@ div#intro.hide + #main {
 #main .mem-box {
     display: flex;
     gap: 24px;
-
     opacity: 0;
     transform: translateY(50%);
     transition: 0.8s;
@@ -199,6 +205,9 @@ div#intro.hide + #main {
 }
 #main .mem-img {
     flex-basis: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid #ddd;
 }
 #main .mem-img a {
     position: relative;
@@ -207,7 +216,6 @@ div#intro.hide + #main {
     justify-content: center;
     height: 0;
     padding: 100% 0 0;
-    border-radius: 16px;
     overflow: hidden;
 }
 #main .mem-img a .hover-txt {
@@ -220,7 +228,8 @@ div#intro.hide + #main {
     justify-content: center;
     width: 100%;
     height: 100%;
-    font-size: 24px;
+    font-size: 26px;
+    font-weight: 700;
     color: #fff;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(8px);
@@ -240,31 +249,34 @@ div#intro.hide + #main {
     object-fit: cover;
 }
 #main .mem-box .link {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    justify-content: end;
+    gap: 8px;
 }
 #main .mem-box .link a {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     background-color: #fff;
-    border: 2px solid #193722;
-    border-radius: 16px;
-    transition: 0.5s;
+    border-radius: 100%;
+    box-shadow: 2px 2px 14px rgba(0, 0, 0, 0.2);
+    transition: all ease 0.4s;
 }
 #main .mem-box .link a:hover {
-    background-color: rgba(0, 115, 27, 0.6);
+    background-color: #ddd;
 }
-
 #main .mem-box .link a img {
-    width: 45px;
+    width: 40px;
     height: auto;
     transition: 0.5s;
 }
-
 #main .mem-box .link a:hover img {
     transform: scale(1.12);
 }

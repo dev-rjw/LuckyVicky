@@ -130,7 +130,7 @@
             import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
             import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
             import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-            import { doc, updateDoc, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+            import { doc, updateDoc, increment, onSnapshot, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
             const firebaseConfig = {
                 apiKey: "AIzaSyCmKJSlgO0ueisoj66FA_rOUTzNv8YzJ3o",
@@ -361,23 +361,46 @@
                     return index, likes, city;
                 };
 
-                const createComment = () => {
+                const createComment = (imgId) => {
+                    var onTab = imgId; // 준호 수정
+
                     // comment start -----------------------------------------
                     const form = document.querySelector("form");
                     const input = document.querySelector("input");
-                    const ul = document.querySelector("ul");
+                    const ul = document.querySelector("ul.comments-list");
 
                     // 댓글 삭제
                     const delItem = (event) => {
                         const target = event.target.parentElement;
+                        console.log(target);
+
+                        // 준호 수정
+                        var now;
+                        docs.forEach((doc) => {
+                            let row = doc.data();
+                            if (row["index"] == onTab) {
+                                now = doc.id;
+                            }
+                        });
+
+                        console.log("now = " + now); // 문서 id
+
+                        let commedDoc = doc(db, "description", now);
+
+                        updateDoc(commedDoc, {
+                            commend: arrayRemove(target.querySelector("span").innerText),
+                        });
+                        // 준호 수정 끝
+
                         target.remove();
                     };
 
                     // 댓글 수정
                     const modifyItem = (event) => {
-                        console.log(event.target.parentElement);
+                        // const target = event.target.parentElement;
                         const message = this.prompt("수정할 메세지를 입력하세요.", event.target.parentElement.firstElementChild.innerText);
                         event.target.parentElement.firstElementChild.innerText = message;
+                        // --------
                     };
 
                     // 댓글 추가
@@ -401,39 +424,59 @@
 
                     const handler = (event) => {
                         event.preventDefault();
-                        addItem(input.value);
+
+                        // 준호 수정
+                        var nowDoc;
+                        console.log("docs =" + docs);
+                        docs.forEach((doc) => {
+                            let row = doc.data();
+                            // console.log(doc.data());
+                            if (row["index"] == onTab) {
+                                console.log(row["index"]); // 4
+                                // console.log(onTab);
+                                nowDoc = doc.id;
+                                // console.log(doc.id);
+                            }
+                        });
+
+                        // console.log("nowDoc =" + nowDoc); // 문서 id
+
+                        let commendDoc = doc(db, "description", nowDoc);
+
+                        updateDoc(commendDoc, {
+                            commend: arrayUnion(input.value),
+                        });
+                        // 준호 수정 끝
+
                         input.value = "";
                     };
+
+                    // 준호 수정
+                    let nowDocId;
+                    docs.forEach((doc) => {
+                        let row = doc.data();
+                        if (row["index"] == onTab) {
+                            nowDocId = doc.id;
+                        }
+                    });
+
+                    // console.log(nowDocId); // 문서 id
+
+                    onSnapshot(doc(db, "description", nowDocId), (doc) => {
+                        let row = doc.data();
+                        let comments = row["commend"];
+                        document.querySelector(".comments-list").innerHTML = "";
+                        comments.forEach((c) => {
+                            addItem(c);
+                            input.value = "";
+                        });
+                    });
+                    // 준호 수정 끝
 
                     form.addEventListener("submit", handler);
 
                     // comment end -----------------------------------------
                 };
-
-                // 좋아요 버튼 생성
-                function createLikeBtn(index, likes, docId) {
-                    const likeBtnArea = document.getElementById("like-btn-area");
-                    likeBtnArea.innerHTML = `
-                        <button class="like-btn like-btn-${index}">
-                            <div class="like-icon">
-                                <span class="material-symbols-rounded"> thumb_up </span>
-                            </div>
-                            <span class="like-text">${likes}</span>
-                        </button>
-                    `;
-                    const likeBtnIndex = document.querySelector(`.like-btn-${index}`);
-                    likeBtnIndex.addEventListener("click", function () {
-                        incrementLike(docId);
-                    });
-
-                    // 실시간 업데이트 리스너 설정
-                    let likesRef = doc(db, "description", docId);
-                    onSnapshot(likesRef, (doc) => {
-                        let updatedLikes = doc.data().likes;
-                        let likeText = document.querySelector(`.like-btn-${index} .like-text`);
-                        likeText.innerText = updatedLikes;
-                    });
-                }
 
                 // 좋아요 증가
                 async function incrementLike(docId) {
@@ -487,7 +530,7 @@
                         let index,
                             likes,
                             city = createDescrption(row);
-                        createComment();
+                        createComment(valName);
                         createLikeBtn(index, likes, docId);
                         getWeather(city);
                     }
@@ -512,7 +555,7 @@
                                 let index,
                                     likes,
                                     city = createDescrption(row);
-                                createComment();
+                                createComment(image.target.id);
                                 createLikeBtn(index, likes, docId);
                                 getWeather(city);
                             }
